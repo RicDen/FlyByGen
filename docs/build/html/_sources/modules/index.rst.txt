@@ -1,0 +1,6 @@
+.. toctree::
+   :maxdepth: 1
+
+   blender_controller
+   another_module
+   # Add more module names here

@@ -1,0 +1,6 @@
+Blender controller
+------------------
+.. automodule:: src.blender.control_blender
+   :members:
+   :undoc-members:
+

@@ -1,0 +1,451 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Object Generators" href="gen_object.html" /><link rel="prev" title="Scene Generator" href="gen_scene.html" />
+
+    <!-- Generated with Sphinx 6.2.1 and Furo 2023.05.20 -->
+        <title>Render Settings - FlyByGen 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">FlyByGen 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">FlyByGen 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Intro/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Intro/overview.html#example-restructured-text">Example Restructured Text</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../apidocs.html">API Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../blender_controller.html">Blender controller</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Blender controller</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_scene.html">Scene Generator</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Scene Generator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 current has-children current-page"><a class="current reference internal" href="#">Render Settings</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Render Settings</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_object.html">Object Generators</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Object Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_particle.html">Particle Generators</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Particle Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="animate_spacecraft.html">Animations</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Animations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_dataset.html">Dataset</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Dataset</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../configs.html">Config Documentation</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="render-settings">
+<h1>Render Settings<a class="headerlink" href="#render-settings" title="Permalink to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-src.blender.Output.RenderSettings"></span><dl class="py class">
+<dt class="sig sig-object py" id="src.blender.Output.RenderSettings.RenderSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.blender.Output.RenderSettings.</span></span><span class="sig-name descname"><span class="pre">RenderSettings</span></span><a class="headerlink" href="#src.blender.Output.RenderSettings.RenderSettings" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class defines all areas of the render settings in blender</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Output.RenderSettings.RenderSettings.set_color_management">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_color_management</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color_management_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Output.RenderSettings.RenderSettings.set_color_management" title="Permalink to this definition">#</a></dt>
+<dd><p>Sets the render color management
+The color management settings are set according to dictionary given
+:param color_management_config (dict): A dictionary containing the needed color management settings</p>
+<p>Example of color_management_config dictionary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;color_management&quot;:{
+    &quot;display_device&quot;: &quot;sRGB&quot;,
+    &quot;view_transform&quot;: &quot;Raw&quot;,
+    &quot;look&quot;: &quot;None&quot;,
+    &quot;exposure&quot;: 0,
+    &quot;gamma&quot;: 1,
+    &quot;sequencer_colorspace_settings&quot;: &quot;sRGB&quot;
+}
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Output.RenderSettings.RenderSettings.set_cycles">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_cycles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cycles_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Output.RenderSettings.RenderSettings.set_cycles" title="Permalink to this definition">#</a></dt>
+<dd><p>Sets all cycles related settings such as experimental settings and GPU enabled or not
+:param cycles_config (dict): A dictionary containing the needed cycles settings</p>
+<p>Example of cycles_config dictionary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;cycles&quot;:{
+    &quot;experimental&quot;: true,
+    &quot;GPU&quot;: true
+    }
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Output.RenderSettings.RenderSettings.set_framerange">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_framerange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">framerange_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Output.RenderSettings.RenderSettings.set_framerange" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines the start, end and step for sequence renders which could be used for animation movies
+Framerange settings are set according to dictionary given
+:param framerange_config (dict): A dictionary containing the needed frame range settings</p>
+<p>Example of framerange_config dictionary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;framerange&quot;:{
+    &quot;frame_start&quot;: 0,
+    &quot;frame_end&quot;: 480,
+    &quot;frame_step&quot;: 1,
+    &quot;use_multiview&quot;: false
+}
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Output.RenderSettings.RenderSettings.set_lightpaths">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_lightpaths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lightpaths_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Output.RenderSettings.RenderSettings.set_lightpaths" title="Permalink to this definition">#</a></dt>
+<dd><p>Sets the lightpath complexity. This is especially relevant for rendering of dust and shadows
+Lightpaths settings are set according to dictionary given
+:param lightpaths_config (dict): A dictionary containing the needed lightpaths settings</p>
+<p>Example of lightpaths_config dictionary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;lightpaths&quot;:{
+    &quot;max_bounces&quot;: 128,
+    &quot;diffuse_bounces&quot;: 128,
+    &quot;glossy_bounces&quot;: 128,
+    &quot;transmission_bounces&quot;: 128,
+    &quot;volume_bounces&quot;: 128,
+    &quot;transparent_max_bounces&quot;: 128
+}
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Output.RenderSettings.RenderSettings.set_motion_blur">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_motion_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motion_blur_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Output.RenderSettings.RenderSettings.set_motion_blur" title="Permalink to this definition">#</a></dt>
+<dd><p>Sets motion blur settings
+Motion blur settings are set according to dictionary given
+:param motion_blur_config (dict): A dictionary containing the needed motion blur settings</p>
+<p>Example of motion_blur_config dictionary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;motion_blur&quot;:{
+    &quot;use_motion_blur&quot;: true,
+    &quot;motion_blur_position&quot;: &quot;CENTER&quot;,
+    &quot;motion_blur_shutter&quot;: 0.001,
+    &quot;rolling_shutter_type&quot;: &quot;NONE&quot;
+}
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Output.RenderSettings.RenderSettings.set_output_format">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_output_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_format_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Output.RenderSettings.RenderSettings.set_output_format" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines the output format and properties
+Output format and properties settings are set according to dictionary given
+:param output_format_config (dict): A dictionary containing the needed Output format and properties settings</p>
+<p>Example of output_format_config dictionary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;output_format&quot;:{
+    &quot;resolution_x&quot;: 2048,
+    &quot;resolution_y&quot;: 2048,
+    &quot;pixel_aspect_x&quot;: 1,
+    &quot;pixel_aspect_y&quot;: 1
+}
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Output.RenderSettings.RenderSettings.set_render_samples">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_render_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">render_samples_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Output.RenderSettings.RenderSettings.set_render_samples" title="Permalink to this definition">#</a></dt>
+<dd><p>Sets the render sample settings according to dictionary given
+:param render_samples_config (dict): A dictionary containing the needed render samples settings</p>
+<p>Example of render_samples_config dictionary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;render_samples&quot;:{
+    &quot;use_adaptive_sampling&quot;: false,
+    &quot;samples&quot;: 512,
+    &quot;use_denoising&quot;: true,
+    &quot;denoiser&quot;: &quot;OPTIX&quot;
+}
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Output.RenderSettings.RenderSettings.set_viewport_samples">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_viewport_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">viewport_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Output.RenderSettings.RenderSettings.set_viewport_samples" title="Permalink to this definition">#</a></dt>
+<dd><p>Sets the viewport settings. Settings should be set to low values to allow a smooth preview in blender itself
+:param viewport_config (dict): A dictionary containing the needed viewport settings</p>
+<p>Example of viewport_config dictionary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;viewport&quot;:{
+    &quot;preview_adaptive_sampling&quot;: false,
+    &quot;preview_samples&quot;: &quot;16&quot;
+}
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="gen_object.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Object Generators</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="gen_scene.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Scene Generator</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Ric Dengel
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Render Settings</a><ul>
+<li><a class="reference internal" href="#src.blender.Output.RenderSettings.RenderSettings"><code class="docutils literal notranslate"><span class="pre">RenderSettings</span></code></a><ul>
+<li><a class="reference internal" href="#src.blender.Output.RenderSettings.RenderSettings.set_color_management"><code class="docutils literal notranslate"><span class="pre">RenderSettings.set_color_management()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Output.RenderSettings.RenderSettings.set_cycles"><code class="docutils literal notranslate"><span class="pre">RenderSettings.set_cycles()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Output.RenderSettings.RenderSettings.set_framerange"><code class="docutils literal notranslate"><span class="pre">RenderSettings.set_framerange()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Output.RenderSettings.RenderSettings.set_lightpaths"><code class="docutils literal notranslate"><span class="pre">RenderSettings.set_lightpaths()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Output.RenderSettings.RenderSettings.set_motion_blur"><code class="docutils literal notranslate"><span class="pre">RenderSettings.set_motion_blur()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Output.RenderSettings.RenderSettings.set_output_format"><code class="docutils literal notranslate"><span class="pre">RenderSettings.set_output_format()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Output.RenderSettings.RenderSettings.set_render_samples"><code class="docutils literal notranslate"><span class="pre">RenderSettings.set_render_samples()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Output.RenderSettings.RenderSettings.set_viewport_samples"><code class="docutils literal notranslate"><span class="pre">RenderSettings.set_viewport_samples()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    </body>
+</html>

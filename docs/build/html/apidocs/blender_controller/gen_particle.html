@@ -1,0 +1,639 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Animations" href="animate_spacecraft.html" /><link rel="prev" title="Object Generators" href="gen_object.html" />
+
+    <!-- Generated with Sphinx 6.2.1 and Furo 2023.05.20 -->
+        <title>Particle Generators - FlyByGen 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">FlyByGen 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">FlyByGen 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Intro/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Intro/overview.html#example-restructured-text">Example Restructured Text</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../apidocs.html">API Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../blender_controller.html">Blender controller</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Blender controller</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_scene.html">Scene Generator</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Scene Generator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="set_render.html">Render Settings</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Render Settings</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_object.html">Object Generators</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Object Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 current has-children current-page"><a class="current reference internal" href="#">Particle Generators</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Particle Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="animate_spacecraft.html">Animations</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Animations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_dataset.html">Dataset</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Dataset</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../configs.html">Config Documentation</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="particle-generators">
+<h1>Particle Generators<a class="headerlink" href="#particle-generators" title="Permalink to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="module-src.blender.Environment.DustJet_Basic">
+<span id="basic-dust-generator"></span><h2>Basic Dust Generator<a class="headerlink" href="#module-src.blender.Environment.DustJet_Basic" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.blender.Environment.DustJet_Basic.</span></span><span class="sig-name descname"><span class="pre">DustJetGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_object</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'core'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.apply_dust_material">
+<span class="sig-name descname"><span class="pre">apply_dust_material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emitter_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.apply_dust_material" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>emitter_object</strong> (<em>bpy.types.Object</em>) – The emitter object to be worked with</p></li>
+<li><p><strong>material</strong> (<em>str</em>) – Name of the material to be applied to the dust</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.create_environment_objects">
+<span class="sig-name descname"><span class="pre">create_environment_objects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core_object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.create_environment_objects" title="Permalink to this definition">#</a></dt>
+<dd><p>Duplicates the targeted core object as basis for the particle system.
+The object will not be visible in the render, but its particle system will be</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>core_object</strong> (<em>bpy.types.Object</em>) – Core object to attach dust jets too</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.emitter_render_settings">
+<span class="sig-name descname"><span class="pre">emitter_render_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emitter_object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.emitter_render_settings" title="Permalink to this definition">#</a></dt>
+<dd><p>Adjust rendering settings for the emitter object.</p>
+<p>This function modifies various rendering-related settings of the emitter object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>emitter_object</strong> (<em>bpy.types.Object</em>) – The emitter object to adjust rendering settings for.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.load_particles_settings_from_json">
+<span class="sig-name descname"><span class="pre">load_particles_settings_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.load_particles_settings_from_json" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_create_and_config_particles">
+<span class="sig-name descname"><span class="pre">mod_create_and_config_particles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jets'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_create_and_config_particles" title="Permalink to this definition">#</a></dt>
+<dd><p>Create and configure particle system settings for a given particle kind.</p>
+<p>This function creates and configures particle system settings based on the provided particle kind.
+It sets various parameters related to emission, velocity, rotation, physics, rendering, viewport display,
+children settings, field weights, and force fields.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>particle_kind</strong> (<em>str</em>) – The kind of particles to configure (default: “jets”).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The particle settings object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bpy.types.particle_settings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_clumping">
+<span class="sig-name descname"><span class="pre">mod_particles_set_childern_clumping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clump_curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clump_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clump_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clump_noise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_clumping" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle clumping settings for children.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings configuration to adapt.</p></li>
+<li><p><strong>clump_curve</strong> (<em>bool</em>) – Flag indicating whether to use a clump curve (default: False).</p></li>
+<li><p><strong>clump_factor</strong> (<em>float</em>) – The clump factor (default: 1).</p></li>
+<li><p><strong>clump_shape</strong> (<em>int</em>) – The clump shape (default: 0).</p></li>
+<li><p><strong>clump_noise</strong> (<em>bool</em>) – Flag indicating whether to use clump noise (default: False).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_interpolated">
+<span class="sig-name descname"><span class="pre">mod_particles_set_childern_interpolated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">children_parting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">children_clumping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">children_roughness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">child_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'INTERPOLATED'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">child_nbr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rendered_child_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">child_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">child_length_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">child_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">virtual_parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_long_hair_children</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_interpolated" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle children settings for the interpolated type.</p>
+<p>This function configures particle children settings when the child type is set to ‘INTERPOLATED’.
+It sets various parameters related to the number of children, their length, seed, virtual parents, and long hair children.
+Additionally, it applies child parting, clumping, and roughness settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings configuration to adapt.</p></li>
+<li><p><strong>children_parting</strong> (<em>dict</em>) – Particle child parting settings.</p></li>
+<li><p><strong>children_clumping</strong> (<em>dict</em>) – Particle child clumping settings.</p></li>
+<li><p><strong>children_roughness</strong> (<em>dict</em>) – Particle child roughness settings.</p></li>
+<li><p><strong>child_type</strong> (<em>str</em>) – The type of particle children (default: “INTERPOLATED”).</p></li>
+<li><p><strong>child_nbr</strong> (<em>int</em>) – The number of children for each parent particle (default: 20).</p></li>
+<li><p><strong>rendered_child_count</strong> (<em>int</em>) – The number of children rendered in the viewport (default: 20).</p></li>
+<li><p><strong>child_length</strong> (<em>float</em>) – The initial length of children as a factor of the parent size (default: 1).</p></li>
+<li><p><strong>child_length_threshold</strong> (<em>float</em>) – The threshold below which children are removed (default: 0).</p></li>
+<li><p><strong>child_seed</strong> (<em>int</em>) – The random seed for child generation (default: 0).</p></li>
+<li><p><strong>virtual_parents</strong> (<em>int</em>) – The number of virtual parents for each particle (default: 0).</p></li>
+<li><p><strong>create_long_hair_children</strong> (<em>bool</em>) – Whether to create long hair children (default: False).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_parting">
+<span class="sig-name descname"><span class="pre">mod_particles_set_childern_parting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parting_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.529147</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parting_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parting_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_parting" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle parting settings for children.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings configuration to adapt.</p></li>
+<li><p><strong>factor</strong> (<em>float</em>) – The parting factor (default: 0.529147).</p></li>
+<li><p><strong>min</strong> (<em>float</em>) – The minimum parting value (default: 0.1).</p></li>
+<li><p><strong>max</strong> (<em>float</em>) – The maximum parting value (default: 0).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_roughness">
+<span class="sig-name descname"><span class="pre">mod_particles_set_childern_roughness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">one</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">one_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">two_roughness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">two_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">two_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_roughness" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle roughness settings for children.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings configuration to adapt.</p></li>
+<li><p><strong>curve</strong> (<em>bool</em>) – Flag indicating whether to use a roughness curve (default: False).</p></li>
+<li><p><strong>one</strong> (<em>float</em>) – The roughness value for the first point on the curve (default: 0).</p></li>
+<li><p><strong>one_size</strong> (<em>float</em>) – The size value for the first point on the curve (default: 1).</p></li>
+<li><p><strong>endpoint</strong> (<em>float</em>) – The roughness value for the endpoint of the curve (default: 0).</p></li>
+<li><p><strong>end_shape</strong> (<em>int</em>) – The shape of the curve endpoint (default: 1).</p></li>
+<li><p><strong>two_roughness</strong> (<em>float</em>) – The roughness value for the second point on the curve (default: 1).</p></li>
+<li><p><strong>two_size</strong> (<em>float</em>) – The size value for the second point on the curve (default: 1).</p></li>
+<li><p><strong>two_threshold</strong> (<em>float</em>) – The threshold value for the second point on the curve (default: 0).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_emission">
+<span class="sig-name descname"><span class="pre">mod_particles_set_emission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'EMITTER'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emit_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FACE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_modifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RAND'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emit_random</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">even_distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_emission" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle emission settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.ParticleSettings</em>) – The particle settings configuration to adapt.</p></li>
+<li><p><strong>type</strong> (<em>str</em>) – The type of particle emission (default: ‘EMITTER’).</p></li>
+<li><p><strong>count</strong> (<em>int</em>) – Number of emitter jets attached to the object. This decides how much dust will be generated (default: 15000).</p></li>
+<li><p><strong>seed</strong> (<em>int</em>) – The seed value for randomizing particles (default: 0).</p></li>
+<li><p><strong>frame_start</strong> (<em>int</em>) – The frame where the particle emission starts (default: 1).</p></li>
+<li><p><strong>frame_end</strong> (<em>int</em>) – The frame where the particle emission ends (default: 1).</p></li>
+<li><p><strong>lifetime</strong> (<em>int</em>) – The lifetime of emitted particles in frames (default: 500000).</p></li>
+<li><p><strong>random</strong> (<em>float</em>) – The randomness factor for particle lifetime (default: 0).</p></li>
+<li><p><strong>emit_from</strong> (<em>str</em>) – The location to emit particles from (default: ‘FACE’).</p></li>
+<li><p><strong>use_modifier</strong> (<em>bool</em>) – Flag indicating whether to use modifiers (default: True).</p></li>
+<li><p><strong>distribution</strong> (<em>str</em>) – The distribution type of emitted particles (default: ‘RAND’).</p></li>
+<li><p><strong>emit_random</strong> (<em>bool</em>) – Flag indicating whether to use random emission (default: True).</p></li>
+<li><p><strong>even_distribution</strong> (<em>bool</em>) – Flag indicating whether to use even distribution (default: True).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_field">
+<span class="sig-name descname"><span class="pre">mod_particles_set_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gravity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vortex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnetic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harmonic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">charge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lennardjones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curve_guide</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texture</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smokeflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">turbulence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_field" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle field weights settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings configuration to adapt.</p></li>
+<li><p><strong>gravity</strong> (<em>float</em>) – The weight of gravity field (default: 0).</p></li>
+<li><p><strong>all</strong> (<em>float</em>) – The weight of all fields (default: 1).</p></li>
+<li><p><strong>force</strong> (<em>float</em>) – The weight of force field (default: 1).</p></li>
+<li><p><strong>vortex</strong> (<em>float</em>) – The weight of vortex field (default: 1).</p></li>
+<li><p><strong>magnetic</strong> (<em>float</em>) – The weight of magnetic field (default: 1).</p></li>
+<li><p><strong>harmonic</strong> (<em>float</em>) – The weight of harmonic field (default: 1).</p></li>
+<li><p><strong>charge</strong> (<em>float</em>) – The weight of charge field (default: 1).</p></li>
+<li><p><strong>lennardjones</strong> (<em>float</em>) – The weight of Lennard-Jones field (default: 1).</p></li>
+<li><p><strong>wind</strong> (<em>float</em>) – The weight of wind field (default: 1).</p></li>
+<li><p><strong>curve_guide</strong> (<em>float</em>) – The weight of curve guide field (default: 1).</p></li>
+<li><p><strong>texture</strong> (<em>float</em>) – The weight of texture field (default: 1).</p></li>
+<li><p><strong>smokeflow</strong> (<em>float</em>) – The weight of smoke flow field (default: 1).</p></li>
+<li><p><strong>turbulence</strong> (<em>float</em>) – The weight of turbulence field (default: 1).</p></li>
+<li><p><strong>drag</strong> (<em>float</em>) – The weight of drag field (default: 1).</p></li>
+<li><p><strong>boid</strong> (<em>float</em>) – The weight of boid field (default: 1).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_force">
+<span class="sig-name descname"><span class="pre">mod_particles_set_force</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_effect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_1_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'NONE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_2_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'NONE'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_force" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle force field settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings configuration to adapt.</p></li>
+<li><p><strong>self_effect</strong> (<em>bool</em>) – Flag indicating whether to enable self-effect (default: False).</p></li>
+<li><p><strong>amount</strong> (<em>float</em>) – The amount of the force effect (default: 0).</p></li>
+<li><p><strong>field_1_type</strong> (<em>str</em>) – The type of the first force field (default: ‘NONE’).</p></li>
+<li><p><strong>field_2_type</strong> (<em>str</em>) – The type of the second force field (default: ‘NONE’).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_physics">
+<span class="sig-name descname"><span class="pre">mod_particles_set_physics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'NO'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_physics" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle physics settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings configuration to adapt</p></li>
+<li><p><strong>type</strong> (<em>str</em>) – The type of physics to apply (default: ‘NO’).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_render">
+<span class="sig-name descname"><span class="pre">mod_particles_set_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance_object</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Cylinder'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_render" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle rendering settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings configuration to adapt</p></li>
+<li><p><strong>size</strong> (<em>float</em>) – The size of the rendered particles (default: 0.2).</p></li>
+<li><p><strong>random</strong> (<em>float</em>) – The randomness factor for particle size (default: 0.5).</p></li>
+<li><p><strong>instance_object</strong> (<em>str</em>) – The object to use for particle instancing (default: “Cylinder”).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_rotation">
+<span class="sig-name descname"><span class="pre">mod_particles_set_rotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_rotation" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle rotation settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings configuration to adapt</p></li>
+<li><p><strong>active</strong> (<em>bool</em>) – Flag indicating whether to enable particle rotation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_velocity">
+<span class="sig-name descname"><span class="pre">mod_particles_set_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normal_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tangent_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tangent_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_align_factors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_random</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_velocity" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle velocity settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>bpy.types.ParticleSettings</em>) – The particle settings configuration to adapt.</p></li>
+<li><p><strong>normal_factor</strong> (<em>float</em>) – The factor for normal velocity (default: 1).</p></li>
+<li><p><strong>tangent_factor</strong> (<em>float</em>) – The factor for tangent velocity (default: 0).</p></li>
+<li><p><strong>tangent_phase</strong> (<em>float</em>) – The phase value for tangent velocity (default: 0).</p></li>
+<li><p><strong>object_align_factors</strong> (<em>tuple</em>) – The factors for object-aligned velocity (default: (0, 0, 0)).</p></li>
+<li><p><strong>object_factor</strong> (<em>float</em>) – The factor for object velocity (default: 0).</p></li>
+<li><p><strong>factor_random</strong> (<em>float</em>) – The randomness factor for particle velocity (default: 0).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_viewport">
+<span class="sig-name descname"><span class="pre">mod_particles_set_viewport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_viewport" title="Permalink to this definition">#</a></dt>
+<dd><p>Configure particle viewport display settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings configuration to adapt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Environment.DustJet_Basic.DustJetGenerator.particles_set_texture">
+<span class="sig-name descname"><span class="pre">particles_set_texture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emitter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texture_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Texture'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blend_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MULTIPLY'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.particles_set_texture" title="Permalink to this definition">#</a></dt>
+<dd><p>Modify particle system settings to use a texture for controlling particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>emitter</strong> (<em>bpy.types.Object</em>) – The object that emits particles.</p></li>
+<li><p><strong>particle_settings</strong> (<em>bpy.types.particle_settings</em>) – The particle settings to modify.</p></li>
+<li><p><strong>texture_name</strong> (<em>str</em>) – The name of the texture to use.</p></li>
+<li><p><strong>map_time</strong> (<em>bool</em>) – Flag indicating whether to use the texture to control particle emission over time.</p></li>
+<li><p><strong>map_density</strong> (<em>bool</em>) – Flag indicating whether to use the texture to control particle density.</p></li>
+<li><p><strong>density_factor</strong> (<em>float</em>) – The factor to multiply the density by when using the texture.</p></li>
+<li><p><strong>blend_type</strong> (<em>str</em>) – The blend type to use for combining the texture with the particle density.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="animate_spacecraft.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Animations</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="gen_object.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Object Generators</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Ric Dengel
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Particle Generators</a><ul>
+<li><a class="reference internal" href="#module-src.blender.Environment.DustJet_Basic">Basic Dust Generator</a><ul>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator</span></code></a><ul>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.apply_dust_material"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.apply_dust_material()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.create_environment_objects"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.create_environment_objects()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.emitter_render_settings"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.emitter_render_settings()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.load_particles_settings_from_json"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.load_particles_settings_from_json()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_create_and_config_particles"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_create_and_config_particles()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_clumping"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_childern_clumping()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_interpolated"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_childern_interpolated()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_parting"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_childern_parting()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_roughness"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_childern_roughness()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_emission"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_emission()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_field"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_field()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_force"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_force()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_physics"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_physics()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_render"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_render()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_rotation"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_rotation()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_velocity"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_velocity()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_viewport"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.mod_particles_set_viewport()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Environment.DustJet_Basic.DustJetGenerator.particles_set_texture"><code class="docutils literal notranslate"><span class="pre">DustJetGenerator.particles_set_texture()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    </body>
+</html>

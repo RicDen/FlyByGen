@@ -1,0 +1,551 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Dataset" href="gen_dataset.html" /><link rel="prev" title="Particle Generators" href="gen_particle.html" />
+
+    <!-- Generated with Sphinx 6.2.1 and Furo 2023.05.20 -->
+        <title>Animations - FlyByGen 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">FlyByGen 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">FlyByGen 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Intro/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Intro/overview.html#example-restructured-text">Example Restructured Text</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../apidocs.html">API Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../blender_controller.html">Blender controller</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Blender controller</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_scene.html">Scene Generator</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Scene Generator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="set_render.html">Render Settings</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Render Settings</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_object.html">Object Generators</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Object Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_particle.html">Particle Generators</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Particle Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 current has-children current-page"><a class="current reference internal" href="#">Animations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Animations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="gen_dataset.html">Dataset</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Dataset</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../configs.html">Config Documentation</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="animations">
+<h1>Animations<a class="headerlink" href="#animations" title="Permalink to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="module-src.blender.Animation.SpacecraftMotion">
+<span id="spacecraft-motion"></span><h2>Spacecraft motion<a class="headerlink" href="#module-src.blender.Animation.SpacecraftMotion" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.blender.Animation.SpacecraftMotion.</span></span><span class="sig-name descname"><span class="pre">SpacecraftMotion</span></span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Time scale in seconds
+Space scale in kilometers
+FPS of simulation</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.add_cycles_modifier">
+<span class="sig-name descname"><span class="pre">add_cycles_modifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcurve</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.add_cycles_modifier" title="Permalink to this definition">#</a></dt>
+<dd><p>Add a ‘CYCLES’ modifier to the given fcurve.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fcurve</strong> (<em>bpy.types.FCurve</em>) – The fcurve to add the modifier to.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.apply_axis_angle_rotation_to_object">
+<span class="sig-name descname"><span class="pre">apply_axis_angle_rotation_to_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_frames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.apply_axis_angle_rotation_to_object" title="Permalink to this definition">#</a></dt>
+<dd><p>Apply axis-angle rotation to the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>bpy.types.Object</em>) – The object to apply rotation to.</p></li>
+<li><p><strong>axis</strong> (<em>tuple</em>) – The axis of rotation as a tuple (x, y, z).</p></li>
+<li><p><strong>period_frames</strong> (<em>int</em>) – The number of frames for one complete rotation.</p></li>
+<li><p><strong>phase</strong> (<em>float</em>) – The initial phase angle in degrees (default: 0).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.apply_linear_movement">
+<span class="sig-name descname"><span class="pre">apply_linear_movement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_end</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.apply_linear_movement" title="Permalink to this definition">#</a></dt>
+<dd><p>Apply linear movement animation to an object in Blender.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>bpy.types.Object</em>) – The object to animate.</p></li>
+<li><p><strong>start</strong> (<em>tuple</em><em> or </em><em>list</em><em> of </em><em>three floats</em><em> (</em><em>x</em><em>, </em><em>y</em><em>, </em><em>z</em><em>)</em>) – The starting location of the object.</p></li>
+<li><p><strong>end</strong> (<em>tuple</em><em> or </em><em>list</em><em> of </em><em>three floats</em><em> (</em><em>x</em><em>, </em><em>y</em><em>, </em><em>z</em><em>)</em>) – The ending location of the object.</p></li>
+<li><p><strong>frame_start</strong> (<em>int</em>) – The starting frame for the animation.</p></li>
+<li><p><strong>frame_end</strong> (<em>int</em>) – The ending frame for the animation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.constraint_trackto">
+<span class="sig-name descname"><span class="pre">constraint_trackto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.constraint_trackto" title="Permalink to this definition">#</a></dt>
+<dd><p>Add a “Track To” constraint to the specified object, making it track a target.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>track_axis</strong> (<em>str</em>) – The axis along which the object should track the target (e.g., ‘TRACK_X’, ‘TRACK_NEGATIVE_Y’, etc.).</p></li>
+<li><p><strong>up_axis</strong> (<em>str</em>) – The axis that should be aligned with the target’s up direction (e.g., ‘UP_X’, ‘UP_Y’, etc.).</p></li>
+<li><p><strong>object</strong> (<em>bpy.types.Object</em>) – The object to which the constraint will be added.</p></li>
+<li><p><strong>target</strong> (<em>bpy.types.Object</em>) – The target object that the ‘object’ should track.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_camera">
+<span class="sig-name descname"><span class="pre">create_camera</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_camera" title="Permalink to this definition">#</a></dt>
+<dd><p>Function which creates a camera with given name, location, and rotation. It also links the camera to the seen and sets it as active.
+NOTE: Camera setting have to be specified with the <a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.set_camera_optics_as_fov" title="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.set_camera_optics_as_fov"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_camera_optics_as_fov()</span></code></a> function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Defines the name of the camera</p></li>
+<li><p><strong>location</strong> (<em>float</em><em>[</em><em>]</em>) – Array with the initial cooridinates of the camera in euler angles</p></li>
+<li><p><strong>rotation</strong> (<em>float</em><em>[</em><em>]</em>) – Array with initialy rotation of the camera</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns the created camera object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bpy.data.objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_points_spacecraft">
+<span class="sig-name descname"><span class="pre">create_points_spacecraft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_points_spacecraft" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a spacecraft point with an optional parent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the spacecraft object.</p></li>
+<li><p><strong>parent</strong> (<em>bpy.types.Object</em>) – The parent object to link to (default: None).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created spacecraft object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bpy.types.Object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_spacecraft_hierarchy">
+<span class="sig-name descname"><span class="pre">create_spacecraft_hierarchy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spacecraft_hierarchy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_spacecraft_hierarchy" title="Permalink to this definition">#</a></dt>
+<dd><p>Reads the given dictionary and creates all the spacecraft points with <a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_points_spacecraft" title="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_points_spacecraft"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_points_spacecraft()</span></code></a>. It also links the created object with the defined parent object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>spacecraft_hierarchy</strong> (<em>dict</em>) – Dictionary containing all spacecraft points and parents</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The dictionary of created spacecraft objects</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.set_camera_optics_as_fov">
+<span class="sig-name descname"><span class="pre">set_camera_optics_as_fov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_specs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.set_camera_optics_as_fov" title="Permalink to this definition">#</a></dt>
+<dd><p>Sets the camera optics with the units as field of view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>angle</strong> (<em>float</em>) – The angle of the the field of view (default = 0.31765)</p></li>
+<li><p><strong>clip_start</strong> (<em>float</em>) – Closest rendering with this camera (default = 0.1)</p></li>
+<li><p><strong>clip_end</strong> (<em>float</em>) – Farthest rendering with this camera (default = 100000)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.set_keyframe_interpolation">
+<span class="sig-name descname"><span class="pre">set_keyframe_interpolation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcurve</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.set_keyframe_interpolation" title="Permalink to this definition">#</a></dt>
+<dd><p>Set the interpolation mode for each keyframe point in the given fcurve.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fcurve</strong> (<em>bpy.types.FCurve</em>) – The fcurve to set the keyframe interpolation for.</p></li>
+<li><p><strong>interpolation</strong> (<em>str</em>) – The interpolation mode to set (‘CONSTANT’, ‘LINEAR’, ‘BEZIER’, etc.).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.setup_flyby">
+<span class="sig-name descname"><span class="pre">setup_flyby</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fly_by_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.setup_flyby" title="Permalink to this definition">#</a></dt>
+<dd><p>Set up spacecraft flyby based on the provided flyby parameters.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>fly_by_params (dict): A dictionary containing flyby parameters.
+fps (int): Frames per second for animation.</p>
+</dd>
+</dl>
+<p>This function sets up the flyby for the spacecraft objects based on the provided
+parameters. It calculates start and end position and frame.</p>
+<p>Example of rotation_params dictionary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fly_by_params = {
+    &quot;speed&quot;: 80,
+    &quot;t_start&quot;: -1220,
+    &quot;t_end&quot;: -1200,
+    &quot;closest_fly_by&quot;: [0, 400, 0],
+    &quot;fly_by_azimuth_degrees&quot;: 0
+
+}
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Note:</dt><dd><p>The fly by parameters must be defined and set up correctly before calling this function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.blender.Animation.SpacecraftMotion.SpacecraftMotion.setup_rotations">
+<span class="sig-name descname"><span class="pre">setup_rotations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotation_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacecraft_objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.setup_rotations" title="Permalink to this definition">#</a></dt>
+<dd><p>Set up spacecraft rotations based on the provided rotation parameters.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>rotation_params (dict): A dictionary containing rotation parameters.
+spacecraft_objects (dict): A dictionary containing spacecraft objects.
+fps (int): Frames per second for animation.</p>
+</dd>
+</dl>
+<p>This function sets up the rotations for the spacecraft objects based on the provided
+rotation parameters. It applies the axis-angle rotation to various objects to create
+the desired animation.</p>
+<dl>
+<dt>Example of rotation_params dictionary:</dt><dd><dl class="simple">
+<dt>rotation_params = {</dt><dd><p>“B2_main_rotation”: {“period”: 4},
+“B2_precession”: {“period”: 100, “angle_deg”: -15},
+“B2_nutation”: {“period”: 20, “angle_deg”: 5},</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>Example of spacecraft_objects dictionary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>spacecraft_objects = {
+    &quot;OPIC_main_pointing&quot;: &lt;bpy.types.Object&gt;,
+    &quot;OPIC_B2_precessing_rotation&quot;: &lt;bpy.types.Object&gt;,
+    &quot;NutatingAxis&quot;: &lt;bpy.types.Object&gt;,
+    &quot;PrecessingMisalignment&quot;: &lt;bpy.types.Object&gt;,
+    &quot;NutationMisalignment&quot;: &lt;bpy.types.Object&gt;,
+    &quot;B2Propagator&quot;: &lt;bpy.types.Object&gt;,
+    &quot;OPICOrigin&quot;: &lt;bpy.types.Object&gt;,
+    &quot;start_point&quot;: &lt;bpy.types.Object&gt;,
+    &quot;end_point&quot;: &lt;bpy.types.Object&gt;,
+    &quot;closest_point&quot;: &lt;bpy.types.Object&gt;,
+    &quot;OPIC&quot;: &lt;bpy.types.Object&gt;,
+
+}
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Note:</dt><dd><p>The rotation parameters and spacecraft objects must be defined and set up correctly before calling this function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="gen_dataset.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Dataset</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="gen_particle.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Particle Generators</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Ric Dengel
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Animations</a><ul>
+<li><a class="reference internal" href="#module-src.blender.Animation.SpacecraftMotion">Spacecraft motion</a><ul>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion</span></code></a><ul>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.add_cycles_modifier"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.add_cycles_modifier()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.apply_axis_angle_rotation_to_object"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.apply_axis_angle_rotation_to_object()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.apply_linear_movement"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.apply_linear_movement()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.constraint_trackto"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.constraint_trackto()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_camera"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.create_camera()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_points_spacecraft"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.create_points_spacecraft()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_spacecraft_hierarchy"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.create_spacecraft_hierarchy()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.set_camera_optics_as_fov"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.set_camera_optics_as_fov()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.set_keyframe_interpolation"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.set_keyframe_interpolation()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.setup_flyby"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.setup_flyby()</span></code></a></li>
+<li><a class="reference internal" href="#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.setup_rotations"><code class="docutils literal notranslate"><span class="pre">SpacecraftMotion.setup_rotations()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    </body>
+</html>

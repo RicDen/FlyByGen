@@ -1,0 +1,642 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 6.2.1 and Furo 2023.05.20 --><title>Index - FlyByGen 1.0.0 documentation</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">FlyByGen 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">FlyByGen 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Intro/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Intro/overview.html#example-restructured-text">Example Restructured Text</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="apidocs.html">API Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="apidocs/blender_controller.html">Blender controller</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Blender controller</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="apidocs/blender_controller/gen_scene.html">Scene Generator</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Scene Generator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="apidocs/blender_controller/set_render.html">Render Settings</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Render Settings</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="apidocs/blender_controller/gen_object.html">Object Generators</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Object Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="apidocs/blender_controller/gen_particle.html">Particle Generators</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Particle Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="apidocs/blender_controller/animate_spacecraft.html">Animations</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Animations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="apidocs/blender_controller/gen_dataset.html">Dataset</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Dataset</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configs.html">Config Documentation</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a></div>
+</section>
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.add_cycles_modifier">add_cycles_modifier() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.apply_axis_angle_rotation_to_object">apply_axis_angle_rotation_to_object() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.apply_dust_material">apply_dust_material() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.apply_linear_movement">apply_linear_movement() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.Nucleus_modulator.apply_modifier">apply_modifier() (src.blender.Object.NucleusGenerator_basic.Nucleus_modulator method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller.html#src.blender.control_blender.BlenderControl">BlenderControl (class in src.blender.control_blender)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_dataset.html#src.blender.Output.DatasetGenerator.DatasetGenerator.config_image_for_dataset">config_image_for_dataset() (src.blender.Output.DatasetGenerator.DatasetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.constraint_trackto">constraint_trackto() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.NucleusGenerator.core_generators">core_generators (src.blender.Object.NucleusGenerator_basic.NucleusGenerator attribute)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.NucleusGenerator.core_merger">core_merger() (src.blender.Object.NucleusGenerator_basic.NucleusGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.CoreGenerator">CoreGenerator (class in src.blender.Object.NucleusGenerator_basic)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.CoreGenerator.create">create() (src.blender.Object.NucleusGenerator_basic.CoreGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.NucleusGenerator.create_and_merge_cores_from_json">create_and_merge_cores_from_json() (src.blender.Object.NucleusGenerator_basic.NucleusGenerator method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_camera">create_camera() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+
+        <ul>
+          <li><a href="apidocs/blender_controller/gen_scene.html#src.blender.Scene.SceneGen_default.SceneGenerator.create_camera">(src.blender.Scene.SceneGen_default.SceneGenerator method)</a>
+</li>
+        </ul></li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.NucleusGenerator.create_core">create_core() (src.blender.Object.NucleusGenerator_basic.NucleusGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.create_environment_objects">create_environment_objects() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_scene.html#src.blender.Scene.SceneGen_default.SceneGenerator.create_light">create_light() (src.blender.Scene.SceneGen_default.SceneGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_points_spacecraft">create_points_spacecraft() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.create_spacecraft_hierarchy">create_spacecraft_hierarchy() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_scene.html#src.blender.Scene.SceneGen_default.SceneGenerator.create_world">create_world() (src.blender.Scene.SceneGen_default.SceneGenerator method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_dataset.html#src.blender.Output.DatasetGenerator.DatasetGenerator">DatasetGenerator (class in src.blender.Output.DatasetGenerator)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator">DustJetGenerator (class in src.blender.Environment.DustJet_Basic)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.emitter_render_settings">emitter_render_settings() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    FlyByGen
+
+        <ul>
+          <li><a href="apidocs.html#module-FlyByGen">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs.html#FlyByGen.FlyByGen">FlyByGen (class in FlyByGen)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.NucleusGenerator.get_core">get_core() (src.blender.Object.NucleusGenerator_basic.NucleusGenerator method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller.html#src.blender.control_blender.BlenderControl.load_modules_specs">load_modules_specs() (src.blender.control_blender.BlenderControl method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.load_particles_settings_from_json">load_particles_settings_from_json() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs.html#FlyByGen.FlyByGen.logging_setup">logging_setup() (FlyByGen.FlyByGen method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.TextureHandler.material_displacement">material_displacement() (src.blender.Object.NucleusGenerator_basic.TextureHandler method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.TextureHandler.material_link">material_link() (src.blender.Object.NucleusGenerator_basic.TextureHandler method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.Nucleus_modulator.mod_add_subdivision">mod_add_subdivision() (src.blender.Object.NucleusGenerator_basic.Nucleus_modulator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_create_and_config_particles">mod_create_and_config_particles() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.Nucleus_modulator.mod_noise_displace">mod_noise_displace() (src.blender.Object.NucleusGenerator_basic.Nucleus_modulator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_clumping">mod_particles_set_childern_clumping() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_interpolated">mod_particles_set_childern_interpolated() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_parting">mod_particles_set_childern_parting() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_childern_roughness">mod_particles_set_childern_roughness() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_emission">mod_particles_set_emission() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_field">mod_particles_set_field() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_force">mod_particles_set_force() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_physics">mod_particles_set_physics() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_render">mod_particles_set_render() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_rotation">mod_particles_set_rotation() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_velocity">mod_particles_set_velocity() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.mod_particles_set_viewport">mod_particles_set_viewport() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.Nucleus_modulator.mod_remesh_sharp">mod_remesh_sharp() (src.blender.Object.NucleusGenerator_basic.Nucleus_modulator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.Nucleus_modulator.mod_remesh_voxel">mod_remesh_voxel() (src.blender.Object.NucleusGenerator_basic.Nucleus_modulator method)</a>
+</li>
+        <li>
+    module
+
+        <ul>
+          <li><a href="apidocs.html#module-FlyByGen">FlyByGen</a>
+</li>
+          <li><a href="apidocs/blender_controller/animate_spacecraft.html#module-src.blender.Animation.SpacecraftMotion">src.blender.Animation.SpacecraftMotion</a>
+</li>
+          <li><a href="apidocs/blender_controller.html#module-src.blender.control_blender">src.blender.control_blender</a>
+</li>
+          <li><a href="apidocs/blender_controller/gen_particle.html#module-src.blender.Environment.DustJet_Basic">src.blender.Environment.DustJet_Basic</a>
+</li>
+          <li><a href="apidocs/blender_controller/gen_object.html#module-src.blender.Object.NucleusGenerator_basic">src.blender.Object.NucleusGenerator_basic</a>
+</li>
+          <li><a href="apidocs/blender_controller/gen_dataset.html#module-src.blender.Output.DatasetGenerator">src.blender.Output.DatasetGenerator</a>
+</li>
+          <li><a href="apidocs/blender_controller/set_render.html#module-src.blender.Output.RenderSettings">src.blender.Output.RenderSettings</a>
+</li>
+          <li><a href="apidocs/blender_controller/gen_scene.html#module-src.blender.Scene.SceneGen_default">src.blender.Scene.SceneGen_default</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.Nucleus_modulator.noise_vertices">noise_vertices() (src.blender.Object.NucleusGenerator_basic.Nucleus_modulator method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.Nucleus_modulator">Nucleus_modulator (class in src.blender.Object.NucleusGenerator_basic)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.NucleusGenerator">NucleusGenerator (class in src.blender.Object.NucleusGenerator_basic)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="O" class="genindex-section">
+  <h2>O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.NucleusGenerator.object_cleaner">object_cleaner() (src.blender.Object.NucleusGenerator_basic.NucleusGenerator method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_particle.html#src.blender.Environment.DustJet_Basic.DustJetGenerator.particles_set_texture">particles_set_texture() (src.blender.Environment.DustJet_Basic.DustJetGenerator method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.NucleusGenerator.project_cleaner">project_cleaner() (src.blender.Object.NucleusGenerator_basic.NucleusGenerator method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_dataset.html#src.blender.Output.DatasetGenerator.DatasetGenerator.render_scene">render_scene() (src.blender.Output.DatasetGenerator.DatasetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/set_render.html#src.blender.Output.RenderSettings.RenderSettings">RenderSettings (class in src.blender.Output.RenderSettings)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.CoreGenerator.rotate">rotate() (src.blender.Object.NucleusGenerator_basic.CoreGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller.html#src.blender.control_blender.BlenderControl.run_modules">run_modules() (src.blender.control_blender.BlenderControl method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller.html#src.blender.control_blender.BlenderControl.save_blender_project">save_blender_project() (src.blender.control_blender.BlenderControl method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.CoreGenerator.scale">scale() (src.blender.Object.NucleusGenerator_basic.CoreGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_scene.html#src.blender.Scene.SceneGen_default.SceneGenerator">SceneGenerator (class in src.blender.Scene.SceneGen_default)</a>
+</li>
+        <li><a href="apidocs.html#FlyByGen.FlyByGen.set_blender_paths">set_blender_paths() (FlyByGen.FlyByGen method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.set_camera_optics_as_fov">set_camera_optics_as_fov() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/set_render.html#src.blender.Output.RenderSettings.RenderSettings.set_color_management">set_color_management() (src.blender.Output.RenderSettings.RenderSettings static method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/set_render.html#src.blender.Output.RenderSettings.RenderSettings.set_cycles">set_cycles() (src.blender.Output.RenderSettings.RenderSettings static method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/set_render.html#src.blender.Output.RenderSettings.RenderSettings.set_framerange">set_framerange() (src.blender.Output.RenderSettings.RenderSettings static method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.set_keyframe_interpolation">set_keyframe_interpolation() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/set_render.html#src.blender.Output.RenderSettings.RenderSettings.set_lightpaths">set_lightpaths() (src.blender.Output.RenderSettings.RenderSettings static method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/set_render.html#src.blender.Output.RenderSettings.RenderSettings.set_motion_blur">set_motion_blur() (src.blender.Output.RenderSettings.RenderSettings static method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/set_render.html#src.blender.Output.RenderSettings.RenderSettings.set_output_format">set_output_format() (src.blender.Output.RenderSettings.RenderSettings static method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/set_render.html#src.blender.Output.RenderSettings.RenderSettings.set_render_samples">set_render_samples() (src.blender.Output.RenderSettings.RenderSettings static method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_dataset.html#src.blender.Output.DatasetGenerator.DatasetGenerator.set_rendered_objects">set_rendered_objects() (src.blender.Output.DatasetGenerator.DatasetGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.Nucleus_modulator.set_smooth">set_smooth() (src.blender.Object.NucleusGenerator_basic.Nucleus_modulator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/set_render.html#src.blender.Output.RenderSettings.RenderSettings.set_viewport_samples">set_viewport_samples() (src.blender.Output.RenderSettings.RenderSettings static method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.setup_flyby">setup_flyby() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion.setup_rotations">setup_rotations() (src.blender.Animation.SpacecraftMotion.SpacecraftMotion method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.CoreGenerator.shape">shape() (src.blender.Object.NucleusGenerator_basic.CoreGenerator method)</a>
+</li>
+        <li><a href="apidocs/blender_controller/animate_spacecraft.html#src.blender.Animation.SpacecraftMotion.SpacecraftMotion">SpacecraftMotion (class in src.blender.Animation.SpacecraftMotion)</a>
+</li>
+        <li>
+    src.blender.Animation.SpacecraftMotion
+
+        <ul>
+          <li><a href="apidocs/blender_controller/animate_spacecraft.html#module-src.blender.Animation.SpacecraftMotion">module</a>
+</li>
+        </ul></li>
+        <li>
+    src.blender.control_blender
+
+        <ul>
+          <li><a href="apidocs/blender_controller.html#module-src.blender.control_blender">module</a>
+</li>
+        </ul></li>
+        <li>
+    src.blender.Environment.DustJet_Basic
+
+        <ul>
+          <li><a href="apidocs/blender_controller/gen_particle.html#module-src.blender.Environment.DustJet_Basic">module</a>
+</li>
+        </ul></li>
+        <li>
+    src.blender.Object.NucleusGenerator_basic
+
+        <ul>
+          <li><a href="apidocs/blender_controller/gen_object.html#module-src.blender.Object.NucleusGenerator_basic">module</a>
+</li>
+        </ul></li>
+        <li>
+    src.blender.Output.DatasetGenerator
+
+        <ul>
+          <li><a href="apidocs/blender_controller/gen_dataset.html#module-src.blender.Output.DatasetGenerator">module</a>
+</li>
+        </ul></li>
+        <li>
+    src.blender.Output.RenderSettings
+
+        <ul>
+          <li><a href="apidocs/blender_controller/set_render.html#module-src.blender.Output.RenderSettings">module</a>
+</li>
+        </ul></li>
+        <li>
+    src.blender.Scene.SceneGen_default
+
+        <ul>
+          <li><a href="apidocs/blender_controller/gen_scene.html#module-src.blender.Scene.SceneGen_default">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.TextureHandler">TextureHandler (class in src.blender.Object.NucleusGenerator_basic)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="apidocs/blender_controller/gen_object.html#src.blender.Object.NucleusGenerator_basic.CoreGenerator.translate">translate() (src.blender.Object.NucleusGenerator_basic.CoreGenerator method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Ric Dengel
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    </body>
+</html>
