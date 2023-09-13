@@ -1,0 +1,46 @@
+{
+    "spacecraft_hierarchy": {
+      "B2Propagator": null,
+      "OPIC_main_pointing": "B2Propagator",
+      "PrecessingMisalignment": "OPIC_main_pointing",
+      "OPIC_B2_precessing_rotation": "PrecessingMisalignment",
+      "NutationMisalignment": "OPIC_B2_precessing_rotation",
+      "NutatingAxis": "NutationMisalignment",
+      "OPICOrigin": "NutatingAxis",
+      "start_point": null,
+      "end_point": null,
+      "closest_point": null
+    },
+    "rotation_parameters": {
+      "B2_main_rotation": {
+        "period": 4
+      },
+      "B2_precession": {
+        "period": 100,
+        "angle_deg": -15.0,
+        "division": 100
+      },
+      "B2_nutation": {
+        "period": 20,
+        "angle_deg": 5.0,
+        "division": 100
+      }, 
+      "Camera_OPIC":{
+        "FOV": 18.2,
+        "Tilt_max": 2.0,
+        "Tilt": 1.15,
+        "clip_start": 0.1,
+        "clip_end": 100000
+      }
+    },
+    "fly_by_parameters": {
+      "speed": 80,
+      "t_start": -1220,
+      "t_end": -1200,
+      "closest_fly_by": [0, 400, 0],
+      "fly_by_azimuth_degrees": 0
+    },
+    "fps": 24,
+    "exposure": 40E-6
+  }
+  

@@ -1,0 +1,11 @@
+{
+    "objects":{
+        "nucleus": 50,
+        "jets": 100
+    },
+    "noises":{
+        "sp": 150,
+        "gauss": 200,
+        "poisson": 103
+    }
+}

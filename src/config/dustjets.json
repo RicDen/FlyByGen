@@ -1,0 +1,94 @@
+{
+    "particle_kind": "dust",
+    "emission_settings": {
+      "type": "EMITTER",
+      "count": 2000,
+      "seed": 0,
+      "frame_start": 1,
+      "frame_end": 1,
+      "lifetime": 500000,
+      "random": 0.0,
+      "emit_from": "FACE",
+      "use_modifier": true,
+      "distribution": "RAND",
+      "emit_random": true,
+      "even_distribution": true
+    },
+    "velocity_settings": {
+      "normal_factor": 1.0,
+      "tangent_factor": 0.0,
+      "tangent_phase": 0.0,
+      "object_align_factors": [0.0, 0.0, 0.0],
+      "object_factor": 0.0,
+      "factor_random": 0.0
+    },
+    "rotation_settings": {
+      "active": false
+    },
+    "physics_settings": {
+      "type": "NO"
+    },
+    "render_settings": {
+      "size": 0.200,
+      "random": 0.500
+    },
+    "viewport_settings": {},
+    "children_settings": {
+      "child_type": "INTERPOLATED",
+      "child_nbr": 20,
+      "rendered_child_count": 20,
+      "child_length": 1,
+      "child_length_threshold": 0, 
+      "child_seed": 0,
+      "virtual_parents": 0, 
+      "create_long_hair_children": false 
+    },
+
+    "children_parting":{
+      "parting_factor": 0.529147 ,
+      "parting_min": 0.1,
+      "parting_max": 0
+
+    },
+    "children_clumping":{
+      "clump_curve": false, 
+      "clump_factor": 1,
+      "clump_shape": 0,
+      "clump_noise": false
+      
+    },
+    "children_roughness":{
+      "curve": false,
+      "one": 0.0,
+      "one_size": 1.0,
+      "endpoint": 0.0,
+      "end_shape": 1.0,
+      "two_roughness": 0.0,
+      "two_size": 1.0,
+      "two_threshold": 0
+    },
+    "field_settings": {
+      "gravity": 0.0,
+      "all": 1.0,
+      "force": 1.0,
+      "vortex": 1.0,
+      "magnetic": 1.0,
+      "harmonic": 1.0,
+      "charge": 1.0,
+      "lennardjones": 1.0,
+      "wind": 1.0,
+      "curve_guide": 1.0,
+      "texture": 1.0,
+      "smokeflow": 1.0,
+      "turbulence": 1.0,
+      "drag": 1.0,
+      "boid": 1.0
+    },
+    "force_settings": {
+      "self_effect": false,
+      "amount": 0,
+      "field_1_type": "NONE",
+      "field_2_type": "NONE"
+    }
+  }
+  

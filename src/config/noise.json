@@ -1,0 +1,16 @@
+{
+    "SP": {
+        "enabled": true,
+        "amount": 0.005
+      },
+      "gaussian": {
+        "enabled": true,
+        "mean": 0,
+        "std": 15
+      },
+      "poisson": {
+        "enabled": false,
+        "amount": 0.1
+      }
+    
+}

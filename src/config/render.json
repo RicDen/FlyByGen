@@ -1,0 +1,65 @@
+{
+    "angle_range": 180,
+    "angle_step": 45,
+    "image_settings":{
+        "file_format": "PNG",
+        "color_mode": "RGBA",
+        "color_depth": "16",
+        "use_compositing": false,
+        "use_pass_object_index": true
+    },
+    "start_frame": 18,
+    "end_frame" :435,
+    "render_layers":{
+        "all": "all"
+    },
+    "cycles":{
+        "experimental": true,
+        "GPU": true
+    },
+    "viewport":{
+        "preview_adaptive_sampling": false,
+        "preview_samples": 16
+    },
+    "render_samples":{
+        "use_adaptive_sampling": false,
+        "samples": 512,
+        "use_denoising": true,
+        "denoiser": "OPTIX"
+    },
+    "lightpaths":{
+        "max_bounces": 128,
+        "diffuse_bounces": 128,
+        "glossy_bounces": 128,
+        "transmission_bounces": 128,
+        "volume_bounces": 128,
+        "transparent_max_bounces": 128
+    },
+    "motion_blur":{
+        "use_motion_blur": true,
+        "motion_blur_position": "CENTER",
+        "motion_blur_shutter": 0.001,
+        "rolling_shutter_type": "NONE"
+    },
+    "color_management":{
+        "display_device": "sRGB",
+        "view_transform": "Raw",
+        "look": "None",
+        "exposure": 0,
+        "gamma": 1,
+        "sequencer_colorspace_settings": "sRGB"
+    },
+    "output_format":{
+        "resolution_x": 2048,
+        "resolution_y": 2048,
+        "pixel_aspect_x": 1,
+        "pixel_aspect_y": 1
+    },
+    "framerange":{
+        "frame_start": 0,
+        "frame_end": 480,
+        "frame_step": 1,
+        "use_multiview": false
+    }
+
+}
