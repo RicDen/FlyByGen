@@ -7,7 +7,6 @@ import logging
 import cv2
 from PIL import Image
 import numpy as np
-import matplotlib.pyplot as plt
 
 with open('src/config/paths.json', 'r') as f:
     paths = json.load(f)

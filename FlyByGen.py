@@ -102,8 +102,10 @@ class FlyByGen:
 
         FlyGenLogger = self.logging_setup()
         logging.info("Starting FlyByGen")
+        # Running blender graphics generator
         blender_command = self.set_blender_paths()
         FlyGenLogger.run_subprocess(blender_command)
+        # Running python post processing
         post_process_command = self.set_post_processing_path()
         FlyGenLogger.run_subprocess(post_process_command)
         logging.info("Finished everything")
