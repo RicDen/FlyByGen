@@ -18,7 +18,16 @@
 
 
 # FlyByGen
-FlyByGen is a fully modular tool which allows the creation of various in space Fly-By scenarios and according image data.
+FlyByGen is a tool which allows the creation of various in space Fly-By scenarios and according image data.
+The setup is intended to be fully modular and enable the easy generation of big datasets.
+
+## Fly By of 433 Eros according to shape model
+![Eros Fly By](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3VnZ21hZDc2bnk4cHg0aDdwMjJoaGtqc3VzcGozODI2ZDB2bWZ3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cftAz6dtRkCTbkAj6j/giphy.gif)
+
+
+## Stand alone image of randomly generated object with dust jets
+![Random Generated](docs/src/Intro/randomJets.png)
+
 The pipeline consists of three parts
 1. Image Generator
 2. Dataset Handler
@@ -28,6 +37,16 @@ The pipeline consists of three parts
 The default image generator utilises blender as graphics generator and the post-processor utilises python libraries as default
 Multiple modules are found in src/blender/ and src/postProcessing
 Each of the modules contributes almost independently to the final result and can be exchanged as wanted following some simple guidelines.
+
+Currently, the pipeline provides the following functionalities:
+- Scene generation
+- Random Nucleus Generation
+- Object inclusion from 3D model (.obj or .stl)
+- Dust Jet Geneartion
+- Simple Fly By and Object animation
+- Raw data set generation
+- Noise generation
+- Ground Trush generation for neural network training
 
 ## Table of Contents (Optional)
 - [SetUp](#setup)
