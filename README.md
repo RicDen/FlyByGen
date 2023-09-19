@@ -21,13 +21,6 @@
 FlyByGen is a tool which allows the creation of various in space Fly-By scenarios and according image data.
 The setup is intended to be fully modular and enable the easy generation of big datasets.
 
-## Fly By of 433 Eros according to shape model
-![Eros Fly By](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3VnZ21hZDc2bnk4cHg0aDdwMjJoaGtqc3VzcGozODI2ZDB2bWZ3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cftAz6dtRkCTbkAj6j/giphy.gif)
-
-
-## Stand alone image of randomly generated object with dust jets
-![Random Generated](docs/src/Intro/randomJets.png)
-
 The pipeline consists of three parts
 1. Image Generator
 2. Dataset Handler
@@ -47,6 +40,13 @@ Currently, the pipeline provides the following functionalities:
 - Raw data set generation
 - Noise generation
 - Ground Trush generation for neural network training
+
+## Example: Fly By of 433 Eros according to shape model
+![Eros Fly By](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3VnZ21hZDc2bnk4cHg0aDdwMjJoaGtqc3VzcGozODI2ZDB2bWZ3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cftAz6dtRkCTbkAj6j/giphy.gif)
+
+
+## Example: Stand alone image of randomly generated object with dust jets
+![Random Generated](docs/src/Intro/randomJets.png)
 
 ## Table of Contents (Optional)
 - [SetUp](#setup)
