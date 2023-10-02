@@ -25,11 +25,12 @@ The pipeline consists of three parts
 1. Image Generator
 2. Dataset Handler
 3. Post-Processor
+
 ![FyByGen Overview Graphic](docs/src/Intro/Overview.png)
 
-The default image generator utilises blender as graphics generator and the post-processor utilises python libraries as default
-Multiple modules are found in src/blender/ and src/postProcessing
-Each of the modules contributes almost independently to the final result and can be exchanged as wanted following some simple guidelines.
+The default image generator utilises blender as graphics generator and the post-processor utilises python libraries as default.
+Multiple modules are found in src/blender/ and src/postProcessing.
+Each of these modules contributes almost independently to the final result and can be exchanged as wanted following some simple guidelines.
 
 Currently, the pipeline provides the following functionalities:
 - Scene generation
@@ -62,8 +63,10 @@ Currently, the pipeline provides the following functionalities:
 Blender comes with a python installation.
 Ideally this is used directly, so no further python installations are required.
 If Blender is not being used, then a separate python installation is required and anaconda environments are recommended. 
-In any scenario the following libraries have to be installed to the according Python environment:
+In any case, the following libraries need to be installed within the respective Python environment:
 - numpy: pip install numpy
+- PIL
+- cv2
 
 ### Blender
 Blender version used for development is 3.4. Install it in the default directory and set the path correctly in src/config/paths.json.
@@ -93,7 +96,7 @@ Then for example the .blend files of blender can be adapted and subsequently the
 ## Documentation
 
 ### Where?
-The documentation for this project is create with sphinx and can be found via
+The documentation for this project is created with sphinx and can be found in the docs folder. It is planned to be hosted on github pages, but for now the simplest way is to clone the repository and open ```/docs/build/html/index.html```
 <!-- TODO: Add reference to extensive documentation -->
 
 ### How
@@ -102,7 +105,7 @@ If blender is used in the toolchain, adapt the path in line 8 of the makefile an
 
 ## Credits
 This tool was written by Ric Dengel with support of Mihkel Pajusalu within the scope of the PhD work and co-sponsored through an [activity](https://activities.esa.int/4000141651) within the European Space Agency OSIP program. 
-The work is also described in TBD (TODO: add article link)
+<!-- The work is also described in TBD (TODO: add article link) -->
 
 This work also would not have been possible without the Blender open source community.
 

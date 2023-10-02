@@ -83,19 +83,18 @@ class FlyByGen:
         bpy_controller = paths['bpy_controller']
         return f'"{blender_path}" -b "{blend_file}" -P "{bpy_controller}"'
 
-        # def run_data_base(paths, version, step(backend vs front end))
-        #   execution of any coordination required for the dataset, packaging, probably should be a library included by the back end and front end
 
     def set_post_processing_path(self):
         """
+            Loads the commands from the json file and combines the blocks into a string which can be run by a subprocess
 
-        # """
+            :return: post processing subprocess execution command
+
+            :rtype: [str]
+        """
         post_controller_python = paths["post_controller_python"]
         post_processing_controller = paths['post_controller_path']
         return [post_controller_python, post_processing_controller]
-    #   execute subprocess with logging
-    #   get all data reference path wanted
-    #   (the config file should define which post processing methods are applied or in which manner)
 
     
     def __init__(self):
