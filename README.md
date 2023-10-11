@@ -69,8 +69,9 @@ In any case, the following libraries need to be installed within the respective 
 - cv2
 
 ### Blender
-Blender version used for development is 3.4. Install it in the default directory and set the path correctly in src/config/paths.json.
+Blender version used for development is 3.6. Install it in the default directory and set the path correctly in src/config/paths.json.
 Use of other blender versions should not cause any issues, but no tests have been performed. Please report if you managed to run other versions as well to state support here. 
+You will also need to add the pipeline base file to the lib folder. The file can be found via: https://tartuulikool-my.sharepoint.com/:u:/g/personal/dengel_ut_ee/EQovUJjKN21Aoh1pVxAL4-MB6Z35rzGY1UYr1f5JuNgChA?e=IqjIAW. An automatic setup is yet to be added
 
 ### Docs with sphinx
 The documentation requirements should be automatically installed with the make.bat / makefile execution.
