@@ -49,7 +49,7 @@ Currently, the pipeline provides the following functionalities:
 ## Example: Stand alone image of randomly generated object with dust jets
 ![Random Generated](docs/src/Intro/randomJets.png)
 
-## Table of Contents (Optional)
+## Table of Contents
 - [SetUp](#setup)
 - [Usage](#usage)
 - [Documentation](#documentation)
