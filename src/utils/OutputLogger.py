@@ -15,6 +15,8 @@ class OutputLogger:
         4. Run any subprocess etc which should be run with the logger
     """
     def __init__(self, paths):
+        if not os.path.exists(paths['cache_dir']):
+            os.mkdir(paths['cache_dir'])
         self.project_directory = os.path.join(paths['cache_dir'], f"{paths['pipeline_version']}{paths['number_of_generation']}")
         self.log_directory = os.path.join(self.project_directory, paths['log_dir'])
         
@@ -51,11 +53,11 @@ class OutputLogger:
             Configures the logging functionalities
             Each logging message is stored with a timestamp
         """
-            logging.basicConfig(
-            filename=self.log_file,
-            filemode="w",
-            level=logging.INFO,
-            format="%(asctime)s - %(message)s"
+        logging.basicConfig(
+        filename=self.log_file,
+        filemode="w",
+        level=logging.INFO,
+        format="%(asctime)s - %(message)s"
         )
 
     def log_output_file(self):

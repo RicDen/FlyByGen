@@ -18,6 +18,8 @@ class MaskGenerator:
     def __init__(self):
         logging.info(f"Starting Mask Gen")
         self.input_directory = paths["dataset_cache"]
+        if not os.path.exists(self.input_directory):
+            os.mkdir(self.input_directory)
         with open(paths["mask_config"]) as f:
             self.mask_config = json.load(f)
         with open(paths['render_configs']) as json_file:

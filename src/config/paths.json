@@ -1,20 +1,21 @@
 {
     "project_directory": "D:\\FlyByGen_Development\\flyby_gen",
-    "blender_path": "C:\\Program Files\\Blender Foundation\\Blender 3.4\\blender.exe",
-    "blend_file": ".\\cache\\LightCurveModel_Eros001\\NucleusMotion.blend",
+    "blender_path": "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
+    "blend_file": ".\\lib\\Pipeline_v1-0_Base_004.blend",
+    
     "bpy_controller": ".\\src\\blender\\control_blender.py",
     "post_controller_python": "C:\\Users\\ricde\\.conda\\envs\\FlyByGen_v1-0\\python.exe",
     "post_controller_path": ".\\src\\postProcessing\\control_postProcessing.py",
 
     "cache_dir": ".\\cache\\",
     "number_of_generation": "001",
-    "pipeline_version": "LightCurveModel_ErosNoDust",
+    "pipeline_version": "SetUp_v1-0",
     "log_dir": "logs\\",
 
     "dataset_cache": "Z:\\FLYBY_GEN\\dataset\\cache\\",
     "dataset_output": "Z:\\FLYBY_GEN\\dataset\\",
-    "dataset_scene": "scene_Real_Eros_NoDust_001\\",
-    "mask_out": "mask_test_002\\",
+    "dataset_scene": "SetUpScene_v1-0\\",
+    "mask_out": "mask_setup_001\\",
     "post_processing_basis": "all\\",
     "noise_output": "noise",
     "post_processing_output": "Z:\\FLYBY_GEN\\out\\post_processing\\",
