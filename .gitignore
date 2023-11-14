@@ -1,6 +1,6 @@
 # Directories
 out\\
-*\\cache\\
+*cache/
 *lib/
 
 # Sphinx Documentation
