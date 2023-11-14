@@ -1,14 +1,14 @@
 # Directories
-out/
-cache/
-lib/
+out\\
+*\\cache\\
+*lib/
 
 # Sphinx Documentation
-build/
+build\\
 
 # other files
-.ideas/
-__pycache__/
-.vscode/
+.ideas\\
+*_pycache__/
+.vscode\\
 
 *.code-workspace

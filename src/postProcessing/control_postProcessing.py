@@ -7,7 +7,6 @@ with open('src/config/paths.json', 'r') as f:
 sys.path.append(paths['project_directory'])
 from src.utils.modularity import ModuleManager
    
-
 class PostProcessor:
     def run_post_modules(self, blender_modules):
         """
