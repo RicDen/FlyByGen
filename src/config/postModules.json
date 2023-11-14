@@ -1,7 +1,7 @@
 {
     "modules": [
       {
-        "class_path": "src\\postProcessing\\GroundTruthMask\\MaskGen.py",
+        "class_path": "src\\postProcess\\GroundTruthMask\\MaskGen.py",
         "module_name": "MaskGen",
         "class_name": "MaskGenerator"
       }

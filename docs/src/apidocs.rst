@@ -13,7 +13,8 @@ Fly By Generator
    :maxdepth: 3
    :caption: Contents:
 
-   apidocs/blender_controller
+   apidocs/control_blender
+   apidocs/control_postProcess
 
 
 

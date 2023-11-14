@@ -5,7 +5,7 @@
     
     "bpy_controller": ".\\src\\blender\\control_blender.py",
     "post_controller_python": "C:\\Users\\ricde\\.conda\\envs\\FlyByGen_v1-0\\python.exe",
-    "post_controller_path": ".\\src\\postProcessing\\control_postProcessing.py",
+    "post_controller_path": ".\\src\\postProcess\\control_postProcess.py",
 
     "cache_dir": ".\\cache\\",
     "number_of_generation": "001",
@@ -18,7 +18,7 @@
     "mask_out": "mask_setup_001\\",
     "post_processing_basis": "all\\",
     "noise_output": "noise",
-    "post_processing_output": "Z:\\FLYBY_GEN\\out\\post_processing\\",
+    "post_processing_output": "Z:\\FLYBY_GEN\\out\\post_process\\",
 
     "blender_modules_path": "src/config/blenderModules.json",
     "post_modules_path": "src/config/postModules.json",
