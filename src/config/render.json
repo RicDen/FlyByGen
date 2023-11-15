@@ -12,8 +12,8 @@
     "end_frame" :19,
     "render_layers":{
         "all": "all",
-        "jets": "jets",
-        "nucleus": "nucleus"
+        "jets": "Dust.001",
+        "nucleus": "AsteroidSurface.001"
     },
     "cycles":{
         "experimental": true,

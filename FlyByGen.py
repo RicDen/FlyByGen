@@ -33,11 +33,7 @@ import json
 import sys
 import os
 import logging
-
-with open('src/config/paths.json', 'r') as f:
-    paths = json.load(f)
-
-sys.path.append(paths['project_directory'])
+import shutil
 
 # FEATURE: Enable multithreading and locking of json files while scene is generated
 class FlyByGen:
@@ -49,6 +45,39 @@ class FlyByGen:
     #     # subprocess.run(cmd_connect_NAS, shell=True)
     #     # print("Connected NAS")
 
+    def init_for_os(self):
+        
+        # Determine the operating system
+        current_os = os.name  # 'nt' for Windows, 'posix' for Linux
+
+        # Load the appropriate path file based on the operating system
+        if current_os == 'nt':  # Windows
+            path_file = 'src/config/windows/paths.json'
+            modules_blender_file = 'src/config/windows/modules_blender.json'
+            modules_post_file = 'src/config/windows/modules_post.json'
+        elif current_os == 'posix':  # Linux
+            path_file = 'src/config/linux/paths.json'
+            modules_blender_file = 'src/config/linux/modules_blender.json'
+            modules_post_file = 'src/config/linux/modules_post.json'
+        else:
+            raise Exception(f"Unsupported operating system: {current_os}")
+
+        # Destination path file (common for both OS)
+        active_path_file = 'src/config/paths.json'
+        active_modules_blender_file = 'src/config/modules_blender.json'
+        active_modules_post_file = 'src/config/modules_post.json'
+
+        # Copy the content of the source path file to the destination path file
+        shutil.copyfile(path_file, active_path_file)
+        shutil.copyfile(modules_blender_file, active_modules_blender_file)
+        shutil.copyfile(modules_post_file, active_modules_post_file)
+
+        with open('src/config/paths.json', 'r') as f:
+            self.paths = json.load(f)
+
+        sys.path.append(self.paths['project_directory'])
+
+
     # DOC: Add paths link to documentation
     def logging_setup(self):
         """
@@ -59,7 +88,7 @@ class FlyByGen:
         :rtype: obj[OutputLogger]
 
         """
-        FlyGenLogger = OutputLogger(paths)
+        FlyGenLogger = OutputLogger(self.paths)
         FlyGenLogger.create_log_file()
         FlyGenLogger.configure_logging()
         FlyGenLogger.log_output_file()
@@ -78,9 +107,9 @@ class FlyByGen:
         :rtype: [str]
 
         """
-        blender_path = paths['blender_path']
-        blend_file = paths['blend_file']
-        bpy_controller = paths['bpy_controller']
+        blender_path = self.paths['blender_path']
+        blend_file = self.paths['blend_file']
+        bpy_controller = self.paths['bpy_controller']
         return f'"{blender_path}" -b "{blend_file}" -P "{bpy_controller}"'
 
 
@@ -92,18 +121,18 @@ class FlyByGen:
 
             :rtype: [str]
         """
-        post_controller_python = paths["post_controller_python"]
-        post_processing_controller = paths['post_controller_path']
+        post_controller_python = self.paths["post_controller_python"]
+        post_processing_controller = self.paths['post_controller_path']
         return [post_controller_python, post_processing_controller]
 
     
     def __init__(self):
-
+        self.init_for_os()
         FlyGenLogger = self.logging_setup()
         logging.info("Starting FlyByGen")
         # Running blender graphics generator
-        blender_command = self.set_blender_paths()
-        FlyGenLogger.run_subprocess(blender_command)
+        # blender_command = self.set_blender_paths()
+        # FlyGenLogger.run_subprocess(blender_command)
         # Running python post processing
         post_process_command = self.set_post_processing_path()
         FlyGenLogger.run_subprocess(post_process_command)

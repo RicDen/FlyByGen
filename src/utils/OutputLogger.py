@@ -17,6 +17,7 @@ class OutputLogger:
     def __init__(self, paths):
         if not os.path.exists(paths['cache_dir']):
             os.mkdir(paths['cache_dir'])
+            print(f"Created cache dir")
         self.project_directory = os.path.join(paths['cache_dir'], f"{paths['pipeline_version']}{paths['number_of_generation']}")
         self.log_directory = os.path.join(self.project_directory, paths['log_dir'])
         
