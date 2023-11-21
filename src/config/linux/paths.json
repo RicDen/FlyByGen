@@ -1,10 +1,10 @@
 {
-    "project_directory": "/home/ric/FlyByGen",
-    "blender_path": "blender",
+    "project_directory": "/home/user/FlyByGen",
+    "blender_path": "~/Software/blender-3.6.5-linux-x64/blender",
     "blend_file": "lib/Pipeline_v1-0_Base_004.blend",
     
     "bpy_controller": "src/blender/control_blender.py",
-    "post_controller_python": "/home/ric/anaconda3/envs/FlyByGen/bin/python",
+    "post_controller_python": "/home/user/anaconda3/envs/FlyByGen/bin/python",
     "post_controller_path": "src/postProcessing/control_postProcessing.py",
 
     "cache_dir": "cache/",

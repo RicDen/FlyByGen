@@ -4,7 +4,7 @@
     "blend_file": ".\\lib\\Pipeline_v1-0_Base_004.blend",
     
     "bpy_controller": ".\\src\\blender\\control_blender.py",
-    "post_controller_python": "C:\\Users\\ricde\\.conda\\envs\\FlyByGen_v1-0\\python.exe",
+    "post_controller_python": "C:\\Users\\user\\.conda\\envs\\FlyByGen_v1-0\\python.exe",
     "post_controller_path": ".\\src\\postProcessing\\control_postProcessing.py",
 
     "cache_dir": "cache\\",
