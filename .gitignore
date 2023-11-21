@@ -3,6 +3,12 @@ out/
 cache/
 lib/
 
+# Set up ignore
+src/config/paths.json
+src/config/modules_blender.json
+src/config/modules_post.json
+
+
 # Sphinx Documentation
 build/
 

@@ -75,6 +75,7 @@ class OutputLogger:
             :type: str
         """
         logging.info("Starting subprocess")
+        print(f"Sub process: {command}")
         try:
             process = subprocess.Popen(
                 command,

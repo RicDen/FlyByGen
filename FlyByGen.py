@@ -34,6 +34,7 @@ import sys
 import os
 import logging
 import shutil
+import subprocess
 
 # FEATURE: Enable multithreading and locking of json files while scene is generated
 class FlyByGen:
@@ -110,7 +111,9 @@ class FlyByGen:
         blender_path = self.paths['blender_path']
         blend_file = self.paths['blend_file']
         bpy_controller = self.paths['bpy_controller']
-        return f'"{blender_path}" -b "{blend_file}" -P "{bpy_controller}"'
+        
+        # return [blender_path f'-b {blend_file}', f'-P {bpy_controller}']
+        return [blender_path, "-b", blend_file, "-P", bpy_controller]
 
 
     def set_post_processing_path(self):
@@ -130,9 +133,11 @@ class FlyByGen:
         self.init_for_os()
         FlyGenLogger = self.logging_setup()
         logging.info("Starting FlyByGen")
+
         # Running blender graphics generator
-        # blender_command = self.set_blender_paths()
-        # FlyGenLogger.run_subprocess(blender_command)
+        blender_command = self.set_blender_paths()
+        FlyGenLogger.run_subprocess(blender_command)
+
         # Running python post processing
         post_process_command = self.set_post_processing_path()
         FlyGenLogger.run_subprocess(post_process_command)

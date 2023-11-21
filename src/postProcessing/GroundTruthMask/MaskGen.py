@@ -86,7 +86,7 @@ class MaskGenerator:
             mask = np.zeros(self.image_shape, dtype= np.uint8)
             mask_image_paths = self.get_mask_image_paths(input_dir, image_type_name)
             logging.info(f"Processing {image_type_name}:")
-            logging.info("Mask image paths:", mask_image_paths)
+            logging.info(f"Mask image paths: {mask_image_paths}")
             logging.info("\n")
             # TODO mask type should be read from json or so
             for image_path in mask_image_paths:
