@@ -4,6 +4,8 @@ import sys
 import json
 import logging
 import os
+import subprocess
+# from src.utils.OutputLogger import OutputLogger
 
 with open('src/config/paths.json', 'r') as f:
     paths = json.load(f)
@@ -96,16 +98,35 @@ class DatasetGenerator:
                       "Check the render.json for the correct definition")
 
         # Loop through frames and set each one
+            # Loop through wanted layers for dataset and render each one
+            # Parallelize rendering using subprocesses
         for frame in range(start_frame, end_frame + 1):
             logging.info(f"Rendering frame: {frame}...")
-            bpy.context.scene.frame_set(frame)
-            # Loop through wanted layers for dataset and render each one
+            
+            processes = []
             for layer, object_name in render_layers.items():
                 logging.info(f"Rendering layer: {layer}...")
-                bpy.context.scene.render.filepath = os.path.join(
-                    output_dir, f"{scene_id}", f"{layer}", f"frame{frame:04d}.png")
                 self.set_rendered_objects(object_name)
-                bpy.ops.render.render(write_still=True)
+                frame_output_path = os.path.join(
+                    output_dir, f"{scene_id}", f"{layer}", f"frame_")
+                logging.info(f"Frame Output path: {frame_output_path}")
+                render_command = [
+                    "../Software/blender-3.6.5-linux-x64/blender",
+                    "-b", "cache/SetUp_v1-1_001/SpacecraftMotion.blend",
+                    "-o", frame_output_path,
+                    "-f", str(frame),
+                    "--", "--cycles-device", "OPTIX"
+                ]
+                frame_process = subprocess.Popen(
+                    render_command
+                    )
+                
+                processes.append(frame_process)
+            
+            for process in processes:
+                process.wait()
+                # bpy.context.scene.frame_set(frame)
+                # bpy.ops.render.render(write_still=True)
 
 # FEATURE: Make the activate and deactivation of materials more flexible
     def set_rendered_objects(self, material):

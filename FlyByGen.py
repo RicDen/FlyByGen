@@ -35,6 +35,7 @@ import os
 import logging
 import shutil
 import subprocess
+import time
 
 # FEATURE: Enable multithreading and locking of json files while scene is generated
 class FlyByGen:
@@ -113,7 +114,7 @@ class FlyByGen:
         bpy_controller = self.paths['bpy_controller']
         
         # return [blender_path f'-b {blend_file}', f'-P {bpy_controller}']
-        return [blender_path, "-b", blend_file, "-P", bpy_controller]
+        return [blender_path, "-b", blend_file, "-P", bpy_controller, "--", "--cycles-device", "OPTIX"]
 
 
     def set_post_processing_path(self):
@@ -133,15 +134,23 @@ class FlyByGen:
         self.init_for_os()
         FlyGenLogger = self.logging_setup()
         logging.info("Starting FlyByGen")
-
+        start_time = time.time()
         # Running blender graphics generator
         blender_command = self.set_blender_paths()
         FlyGenLogger.run_subprocess(blender_command)
-
-        # Running python post processing
-        post_process_command = self.set_post_processing_path()
-        FlyGenLogger.run_subprocess(post_process_command)
+        blender_time = time.time()
+        # # Running python post processing
+        # post_process_command = self.set_post_processing_path()
+        # FlyGenLogger.run_subprocess(post_process_command)
+        post_time = time.time()
+        render = blender_time-start_time
+        post_processing_time = post_time-blender_time
+        total_time = post_time-start_time
+        logging.info(f"Render took: {int(render/60)}min {render%60}s")
+        logging.info(f"Post processing took: {int(post_processing_time/60)}min {(post_processing_time%60)}s")
+        logging.info(f"Pipeline ran for: {int(total_time/60)}min {total_time%60}s")
         logging.info("Finished everything")
+
 
 print("Starting FlyByGen!")
 FlyByGen()
