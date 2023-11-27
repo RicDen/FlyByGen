@@ -20,6 +20,18 @@ from src.utils.modularity import ModuleManager
 
 class BlenderControl:
     # FEATURE: Add automatically incremented blender file name if file exists
+# FEATURE: Modularise python library import
+    def setup_check(self):
+        try:
+            import psutil
+            logging.info(f"Loaded python libraries loaded successfully")
+        except:
+            logging.error(f"Failed to load. Installing python libraries...")
+            import pip
+            print(pip.main(['install', 'psutil']))
+            import psutil
+            logging.warning(f"Loaded modules after install.")
+    
 
     def save_blender_project(self, cache, pipeline_version, number_of_generation, filename):
         """
@@ -100,6 +112,7 @@ class BlenderControl:
 
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
+        self.setup_check()
         with open(paths["blender_modules_path"]) as modules_specs:
             specs = json.load(modules_specs)
         instances = self.run_blender_modules(specs)

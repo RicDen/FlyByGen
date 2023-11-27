@@ -113,7 +113,7 @@ class FlyByGen:
         blend_file = self.paths['blend_file']
         bpy_controller = self.paths['bpy_controller']
         
-        # return [blender_path f'-b {blend_file}', f'-P {bpy_controller}']
+        # return [blender_path, "-b", blend_file, "-P", bpy_controller]
         return [blender_path, "-b", blend_file, "-P", bpy_controller, "--", "--cycles-device", "OPTIX"]
 
 

@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import subprocess
+import time
 # from src.utils.OutputLogger import OutputLogger
 
 with open('src/config/paths.json', 'r') as f:
@@ -97,36 +98,101 @@ class DatasetGenerator:
             logging.error(f"Start frame number must be smaller than end frame number!"+
                       "Check the render.json for the correct definition")
 
-        # Loop through frames and set each one
-            # Loop through wanted layers for dataset and render each one
-            # Parallelize rendering using subprocesses
+        # # Loop through frames and set each one
+        #     # Loop through wanted layers for dataset and render each one
+        #     # Parallelize rendering using subprocesses
+        # for frame in range(start_frame, end_frame + 1):
+        #     logging.info(f"Rendering frame: {frame}...")
+            
+        #     processes = []
+        #     for layer, object_name in render_layers.items():
+        #         video_ram = self.get_gpu_memory_usage()
+        #         logging.info(f"Memory utilisation: {video_ram}")
+        #         logging.info(f"Rendering layer: {layer}...")
+        #         self.set_rendered_objects(object_name)
+        #         frame_output_path = os.path.join(
+        #             output_dir, f"{scene_id}", f"{layer}", f"frame_")
+        #         logging.info(f"Frame Output path: {frame_output_path}")
+        #         render_command = [
+        #             "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
+        #             "-b", "cache/SetUp_v1-1_001/SpacecraftMotion.blend",
+        #             "-o", frame_output_path,
+        #             "-f", str(frame),
+        #             "--", "--cycles-device", "OPTIX"
+        #         ]
+        #         frame_process = subprocess.Popen(
+        #             render_command
+        #             )
+                
+        #         logging.info(f"Memory utilisation: {video_ram}")
+        gpu_memory = 4000
+        gpu_memory_threshold = 4000
+        threshold_margin = 200
+        processes = []
         for frame in range(start_frame, end_frame + 1):
             logging.info(f"Rendering frame: {frame}...")
-            
-            processes = []
             for layer, object_name in render_layers.items():
                 logging.info(f"Rendering layer: {layer}...")
-                self.set_rendered_objects(object_name)
                 frame_output_path = os.path.join(
                     output_dir, f"{scene_id}", f"{layer}", f"frame_")
                 logging.info(f"Frame Output path: {frame_output_path}")
-                render_command = [
-                    "../Software/blender-3.6.5-linux-x64/blender",
-                    "-b", "cache/SetUp_v1-1_001/SpacecraftMotion.blend",
-                    "-o", frame_output_path,
-                    "-f", str(frame),
-                    "--", "--cycles-device", "OPTIX"
-                ]
-                frame_process = subprocess.Popen(
-                    render_command
-                    )
-                
+                while True:
+                    time.sleep(2)
+                    video_ram = self.get_gpu_memory_usage()
+                    logging.info(f"Memory utilization: {video_ram}")  
+                    if video_ram and all(mem < gpu_memory_threshold for mem in video_ram):
+                        # GPU memory is below the threshold, start rendering
+                        self.set_rendered_objects(object_name)
+                        frame_process = self.render_frame(frame, frame_output_path)
+                        # break
+                    else:
+                        logging.warning("Waiting for GPU memory to become available...")
+                    if gpu_memory_threshold == gpu_memory:
+                        logging.info(f"Setting GPU memory threshold...")
+                        time.sleep(10)
+                        video_ram = self.get_gpu_memory_usage()
+                        gpu_memory_threshold = gpu_memory - video_ram[0]-threshold_margin
+                        logging.info(f"GPU memory threshold set to: {gpu_memory_threshold}")
+                                      
+
+
+                # frame_process.wait()
                 processes.append(frame_process)
             
-            for process in processes:
-                process.wait()
+        for process in processes:
+            process.wait()
                 # bpy.context.scene.frame_set(frame)
                 # bpy.ops.render.render(write_still=True)
+            
+
+
+    def render_frame(self, frame, output_path):
+        render_command = [
+            "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
+            "-b", "cache/SetUp_v1-1_001/SpacecraftMotion.blend",
+            "-o", output_path,
+            "-f", str(frame),
+            "--", "--cycles-device", "OPTIX"
+        ]
+        frame_process = subprocess.Popen(
+            render_command
+            )
+        return frame_process
+
+    def get_gpu_memory_usage(self):
+        try:
+            result = subprocess.run(['nvidia-smi', '--query-gpu=memory.used', '--format=csv,nounits,noheader'],
+                                    stdout=subprocess.PIPE, universal_newlines=True)
+            memory_used = [int(x) for x in result.stdout.strip().split('\n')]
+            return memory_used
+        except Exception as e:
+            logging.error(f"Error: {e}")
+            return None
+
+        # Example usage
+        gpu_memory_used = get_gpu_memory_usage()
+        print(f"GPU Memory Used: {gpu_memory_used} MB")
+
 
 # FEATURE: Make the activate and deactivation of materials more flexible
     def set_rendered_objects(self, material):

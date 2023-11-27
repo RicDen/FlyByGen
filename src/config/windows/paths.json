@@ -1,30 +1,30 @@
 {
-    "project_directory": "D:\\FlyByGen_Development\\flyby_gen",
+    "project_directory": "D:\\Git_Repos\\PhD\\FlyByGen_GitHub",
     "blender_path": "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
     "blend_file": ".\\lib\\Pipeline_v1-0_Base_004.blend",
     
     "bpy_controller": ".\\src\\blender\\control_blender.py",
-    "post_controller_python": "C:\\Users\\user\\.conda\\envs\\FlyByGen_v1-0\\python.exe",
+    "post_controller_python": "C:\\Users\\user\\.conda\\envs\\FlyByGen\\python.exe",
     "post_controller_path": ".\\src\\postProcessing\\control_postProcessing.py",
 
     "cache_dir": "cache\\",
     "number_of_generation": "001",
-    "pipeline_version": "SetUp_v1-0_",
+    "pipeline_version": "SetUp_v1-1_",
     "log_dir": "logs\\",
 
     "dataset_cache": "Z:\\FLYBY_GEN\\dataset\\cache\\",
     "dataset_output": "Z:\\FLYBY_GEN\\dataset\\",
-    "dataset_scene": "SetUpScene_v1-0\\",
-    "mask_out": "mask_setup_001\\",
+    "dataset_scene": "SetUp_v1-1\\",
+    "mask_out": "mask/SetUp_v1-1\\",
     "post_processing_basis": "all\\",
     "noise_output": "noise",
-    "post_processing_output": "Z:\\FLYBY_GEN\\out\\post_processing\\",
+    "post_processing_output": "Z:\\FLYBY_GEN\\out\\",
 
     "blender_modules_path": "src/config/modules_blender.json",
     "post_modules_path": "src/config/modules_post.json",
     "nucleus_config": "src/config/nucleus.json",
     "dustjet_config": "src/config/dustjets.json",
-    "spacecraftAnimation_config": "src/config/spacecraftAnimation.json",
+    "spacecraftAnimation_config": "src/config/animation_spacecraft.json",
     "render_configs": "src/config/render.json", 
     
     "noise_config": "src/config/noise.json",
