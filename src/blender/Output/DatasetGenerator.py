@@ -98,35 +98,8 @@ class DatasetGenerator:
             logging.error(f"Start frame number must be smaller than end frame number!"+
                       "Check the render.json for the correct definition")
 
-        # # Loop through frames and set each one
-        #     # Loop through wanted layers for dataset and render each one
-        #     # Parallelize rendering using subprocesses
-        # for frame in range(start_frame, end_frame + 1):
-        #     logging.info(f"Rendering frame: {frame}...")
-            
-        #     processes = []
-        #     for layer, object_name in render_layers.items():
-        #         video_ram = self.get_gpu_memory_usage()
-        #         logging.info(f"Memory utilisation: {video_ram}")
-        #         logging.info(f"Rendering layer: {layer}...")
-        #         self.set_rendered_objects(object_name)
-        #         frame_output_path = os.path.join(
-        #             output_dir, f"{scene_id}", f"{layer}", f"frame_")
-        #         logging.info(f"Frame Output path: {frame_output_path}")
-        #         render_command = [
-        #             "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
-        #             "-b", "cache/SetUp_v1-1_001/SpacecraftMotion.blend",
-        #             "-o", frame_output_path,
-        #             "-f", str(frame),
-        #             "--", "--cycles-device", "OPTIX"
-        #         ]
-        #         frame_process = subprocess.Popen(
-        #             render_command
-        #             )
-                
-        #         logging.info(f"Memory utilisation: {video_ram}")
-        gpu_memory = 4000
-        gpu_memory_threshold = 4000
+        gpu_memory = 24000
+        gpu_memory_threshold = 24000
         threshold_margin = 200
         processes = []
         for frame in range(start_frame, end_frame + 1):
@@ -137,43 +110,42 @@ class DatasetGenerator:
                     output_dir, f"{scene_id}", f"{layer}", f"frame_")
                 logging.info(f"Frame Output path: {frame_output_path}")
                 while True:
-                    time.sleep(2)
+                    time.sleep(5)
                     video_ram = self.get_gpu_memory_usage()
                     logging.info(f"Memory utilization: {video_ram}")  
                     if video_ram and all(mem < gpu_memory_threshold for mem in video_ram):
                         # GPU memory is below the threshold, start rendering
-                        self.set_rendered_objects(object_name)
-                        frame_process = self.render_frame(frame, frame_output_path)
-                        # break
-                    else:
-                        logging.warning("Waiting for GPU memory to become available...")
-                    if gpu_memory_threshold == gpu_memory:
-                        logging.info(f"Setting GPU memory threshold...")
-                        time.sleep(10)
-                        video_ram = self.get_gpu_memory_usage()
-                        gpu_memory_threshold = gpu_memory - video_ram[0]-threshold_margin
-                        logging.info(f"GPU memory threshold set to: {gpu_memory_threshold}")
+                        frame_process = self.render_frame(object_name, frame, frame_output_path)
+                        if gpu_memory_threshold == gpu_memory:
+                            logging.info(f"Setting GPU memory threshold...")
+                            max_gpu_memory_usage = self.get_max_gpu_memory_usage(10)
+                            logging.info(f"Maximum GPU usage is: {max_gpu_memory_usage}")
+                            gpu_memory_threshold = gpu_memory - max_gpu_memory_usage -threshold_margin
+                            logging.info(f"GPU memory threshold set to: {gpu_memory_threshold}")
+                        break
+                    
+                    logging.warning("Waiting for GPU memory to become available...")
                                       
 
 
                 # frame_process.wait()
                 processes.append(frame_process)
+                logging.info(f"There are {len(processes)} running.")
             
         for process in processes:
             process.wait()
-                # bpy.context.scene.frame_set(frame)
-                # bpy.ops.render.render(write_still=True)
             
 
 
-    def render_frame(self, frame, output_path):
+    def render_frame(self, layer, frame, output_path):
         render_command = [
             "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
-            "-b", "cache/SetUp_v1-1_001/SpacecraftMotion.blend",
-            "-o", output_path,
-            "-f", str(frame),
-            "--", "--cycles-device", "OPTIX"
+            "-b", "cache\\SetUp_v1-1_001\\SpacecraftMotion.blend",
+            "-P", "src\\blender\\Output\\RenderFrame.py",
+            "--", "--cycles-device", "OPTIX", 
+            str(layer), str(frame), str(output_path)
         ]
+        logging.info(f"Starting subprocess for render")
         frame_process = subprocess.Popen(
             render_command
             )
@@ -189,33 +161,17 @@ class DatasetGenerator:
             logging.error(f"Error: {e}")
             return None
 
-        # Example usage
-        gpu_memory_used = get_gpu_memory_usage()
-        print(f"GPU Memory Used: {gpu_memory_used} MB")
+    def get_max_gpu_memory_usage(self, test_duration):
+
+        # Get the current time
+        start_time = time.time()
+        max_gpu_memory_usage = 0
+        # Run the loop for the specified duration
+        while time.time() - start_time < test_duration:
+            if max_gpu_memory_usage < self.get_gpu_memory_usage()[0]:
+                max_gpu_memory_usage = self.get_gpu_memory_usage()[0]
+            time.sleep(0.1)
+
+        return max_gpu_memory_usage
 
 
-# FEATURE: Make the activate and deactivation of materials more flexible
-    def set_rendered_objects(self, material):
-        """
-        Sets the active layers for the render by activating the holdout of different materials
-        
-        Parameters:
-            material (str): Defines the material to be active. Every other material which can be deactivated will be deactivated
-
-        NOTE: This is a hard coded function as the math node numbers to de/activate the material are material specific
-        """
-        if material == "Dust.001":
-            logging.info(f"Set dust channels...")
-            bpy.data.materials["Dust.001"].node_tree.nodes["Math.020"].inputs[0].default_value = 0
-            bpy.data.materials["AsteroidSurface.001"].node_tree.nodes["Math.029"].inputs[0].default_value = 1
-        elif material == "AsteroidSurface.001":
-            logging.info(f"Set nucleus channels...")
-            bpy.data.materials["Dust.001"].node_tree.nodes["Math.020"].inputs[0].default_value = 1
-            bpy.data.materials["AsteroidSurface.001"].node_tree.nodes["Math.029"].inputs[0].default_value = 0
-        elif material == "all":
-            logging.info(f"Set all channels...")
-            bpy.data.materials["Dust.001"].node_tree.nodes["Math.020"].inputs[0].default_value = 0
-            bpy.data.materials["AsteroidSurface.001"].node_tree.nodes["Math.029"].inputs[0].default_value = 0
-        else:
-            logging.error(
-                f"Material {material} is not existing, and thus cannot be rendered. Check that the material was specifed correctly")
