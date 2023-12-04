@@ -98,9 +98,11 @@ class DatasetGenerator:
             logging.error(f"Start frame number must be smaller than end frame number!"+
                       "Check the render.json for the correct definition")
 
-        gpu_memory = 24000
-        gpu_memory_threshold = 24000
-        threshold_margin = 200
+        gpu_memory_threshold = sum(self.get_gpu_memory_total())
+        gpu_memory = gpu_memory_threshold
+        logging.info(f"GPU memory available: {gpu_memory}")
+        threshold_factor = 2.0
+        load_delay = 2
         processes = []
         for frame in range(start_frame, end_frame + 1):
             logging.info(f"Rendering frame: {frame}...")
@@ -110,7 +112,7 @@ class DatasetGenerator:
                     output_dir, f"{scene_id}", f"{layer}", f"frame_")
                 logging.info(f"Frame Output path: {frame_output_path}")
                 while True:
-                    time.sleep(5)
+                    time.sleep(load_delay)
                     video_ram = self.get_gpu_memory_usage()
                     logging.info(f"Memory utilization: {video_ram}")  
                     if video_ram and all(mem < gpu_memory_threshold for mem in video_ram):
@@ -120,15 +122,12 @@ class DatasetGenerator:
                             logging.info(f"Setting GPU memory threshold...")
                             max_gpu_memory_usage = self.get_max_gpu_memory_usage(10)
                             logging.info(f"Maximum GPU usage is: {max_gpu_memory_usage}")
-                            gpu_memory_threshold = gpu_memory - max_gpu_memory_usage -threshold_margin
+                            gpu_memory_threshold = gpu_memory - (max_gpu_memory_usage * threshold_factor)
                             logging.info(f"GPU memory threshold set to: {gpu_memory_threshold}")
                         break
                     
                     logging.warning("Waiting for GPU memory to become available...")
                                       
-
-
-                # frame_process.wait()
                 processes.append(frame_process)
                 logging.info(f"There are {len(processes)} running.")
             
@@ -139,9 +138,10 @@ class DatasetGenerator:
 
     def render_frame(self, layer, frame, output_path):
         render_command = [
-            "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
-            "-b", "cache\\SetUp_v1-1_001\\SpacecraftMotion.blend",
-            "-P", "src\\blender\\Output\\RenderFrame.py",
+            # "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
+            "/home/dengel_to/Software/blender-3.6.5-linux-x64/blender",
+            "-b", "cache/SetUp_v1-1_001/SpacecraftMotion.blend",
+            "-P", "src/blender/Output/RenderFrame.py",
             "--", "--cycles-device", "OPTIX", 
             str(layer), str(frame), str(output_path)
         ]
@@ -157,6 +157,15 @@ class DatasetGenerator:
                                     stdout=subprocess.PIPE, universal_newlines=True)
             memory_used = [int(x) for x in result.stdout.strip().split('\n')]
             return memory_used
+        except Exception as e:
+            logging.error(f"Error: {e}")
+            return None
+    def get_gpu_memory_total(self):
+        try:
+            result = subprocess.run(['nvidia-smi', '--query-gpu=memory.free', '--format=csv,nounits,noheader'],
+                                    stdout=subprocess.PIPE, universal_newlines=True)
+            memory_total = [int(x) for x in result.stdout.strip().split('\n')]
+            return memory_total
         except Exception as e:
             logging.error(f"Error: {e}")
             return None

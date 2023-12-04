@@ -23,13 +23,13 @@ class BlenderControl:
 # FEATURE: Modularise python library import
     def setup_check(self):
         try:
-            import psutil
+            # import psutil
             logging.info(f"Loaded python libraries loaded successfully")
         except:
             logging.error(f"Failed to load. Installing python libraries...")
             import pip
-            print(pip.main(['install', 'psutil']))
-            import psutil
+            # print(pip.main(['install', 'psutil']))
+            # import psutil
             logging.warning(f"Loaded modules after install.")
     
 
