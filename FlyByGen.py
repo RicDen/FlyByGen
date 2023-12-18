@@ -37,15 +37,14 @@ import shutil
 import subprocess
 import time
 
+# BUG: Subprocesses don't terminate in Linux
+# from src.utils.setup import SetUp
+# import signal
+# import psutil
+
 # FEATURE: Enable multithreading and locking of json files while scene is generated
 class FlyByGen:
 
-    # BUG: Doesn't work yet, after entering the passwords, the program freezes and nothing happens
-    # def connect_NAS():
-    #     # Connecting for data dump
-    #     # cmd_connect_NAS = f'net use Z: \\to-nas.to.ee\OPIC'
-    #     # subprocess.run(cmd_connect_NAS, shell=True)
-    #     # print("Connected NAS")
 
     def init_for_os(self):
         
@@ -114,7 +113,7 @@ class FlyByGen:
         bpy_controller = self.paths['bpy_controller']
         
         # return [blender_path, "-b", blend_file, "-P", bpy_controller]
-        return [blender_path, "-b", blend_file, "-P", bpy_controller, "--", "--cycles-device", "OPTIX"]
+        return [blender_path, "-b", blend_file, "-P", bpy_controller]
 
 
     def set_post_processing_path(self):
@@ -129,10 +128,24 @@ class FlyByGen:
         post_processing_controller = self.paths['post_controller_path']
         return [post_controller_python, post_processing_controller]
 
-    
+    # BUG: Subprocesses don't terminate in Linux
+    # def cleanup_processes(self):
+    #     # Check for and terminate any remaining subprocesses
+    #     for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+    #         if 'blender' in proc.info['cmdline']:
+    #             logging.warning(f"Terminating detached Blender process: {proc.info['pid']}")
+    #             try:
+    #                 proc.terminate()
+    #             except psutil.NoSuchProcess:
+    #                 pass
+
     def __init__(self):
         self.init_for_os()
         FlyGenLogger = self.logging_setup()
+        # BUG: Subprocesses don't terminate in Linux
+        # main_setup = SetUp()
+        # main_setup.check_libraries()
+        # signal.signal(signal.SIGTERM, self.cleanup_processes)
         logging.info("Starting FlyByGen")
         start_time = time.time()
         # Running blender graphics generator
