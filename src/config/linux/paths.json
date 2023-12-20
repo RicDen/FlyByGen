@@ -1,0 +1,33 @@
+{
+    "project_directory": "/home/user/FlyByGen",
+    "blender_path": "/home/user/Software/blender-3.6.5-linux-x64/blender",
+    "blend_file": "lib/Pipeline_v1-0_Base_004.blend",
+    
+    "bpy_controller": "src/blender/control_blender.py",
+    "post_controller_python": "/home/user/anaconda3/envs/FlyByGen_v1-0/bin/python",
+    "post_controller_path": "src/postProcessing/control_postProcessing.py",
+
+    "cache_dir": "cache/",
+    "number_of_generation": "001",
+    "pipeline_version": "SetUp_v1-1_",
+    "log_dir": "logs/",
+
+    "dataset_cache": "dataset/cache/",
+    "dataset_output": "dataset/",
+    "dataset_scene": "SetUp_v1-1/",
+    "mask_out": "mask/SetUp_v1-1/",
+    "post_processing_basis": "all/",
+    "noise_output": "noise",
+    "post_processing_output": "out/",
+
+    "blender_modules_path": "src/config/modules_blender.json",
+    "post_modules_path": "src/config/modules_post.json",
+    "nucleus_config": "src/config/nucleus.json",
+    "dustjet_config": "src/config/dustjets.json",
+    "spacecraftAnimation_config": "src/config/animation_spacecraft.json",
+    "render_configs": "src/config/render.json", 
+    
+    "noise_config": "src/config/noise.json",
+    "mask_config": "src/config/mask_config.json"
+
+}

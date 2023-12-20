@@ -59,6 +59,23 @@ Currently, the pipeline provides the following functionalities:
 - [Tests](#tests)
 
 ## Setup
+
+### Path configuration
+To run the pipeline successfully you need to adapt certain paths in the OS (Windows/Linux) corresponding  ```src/config/paths.json```.
+Here you need to make sure the following paths are correct:
+Your project directory, where the FlyByGen repository is included
+```
+    "project_directory": "/home/user/FlyByGen",
+```
+Your blender installation path
+```
+    "blender_path": "blender",
+```
+Your python environment for post processing (preferred Conda)
+```
+    "post_controller_python": "/home/user/anaconda3/envs/FlyByGen/bin/python",
+```
+
 ### Python
 Blender comes with a python installation.
 Ideally this is used directly, so no further python installations are required.

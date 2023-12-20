@@ -3,12 +3,19 @@ out/
 cache/
 lib/
 
+# Set up ignore
+src/config/paths.json
+paths.json
+src/config/modules_blender.json
+src/config/modules_post.json
+
+
 # Sphinx Documentation
 build/
 
 # other files
 .ideas/
-__pycache__/
+*_pycache__/
 .vscode/
 
 *.code-workspace

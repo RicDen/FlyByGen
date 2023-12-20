@@ -33,21 +33,51 @@ import json
 import sys
 import os
 import logging
+import shutil
+import subprocess
+import time
 
-with open('src/config/paths.json', 'r') as f:
-    paths = json.load(f)
-
-sys.path.append(paths['project_directory'])
+# BUG: Subprocesses don't terminate in Linux
+# from src.utils.setup import SetUp
+# import signal
+# import psutil
 
 # FEATURE: Enable multithreading and locking of json files while scene is generated
 class FlyByGen:
 
-    # BUG: Doesn't work yet, after entering the passwords, the program freezes and nothing happens
-    # def connect_NAS():
-    #     # Connecting for data dump
-    #     # cmd_connect_NAS = f'net use Z: \\to-nas.to.ee\OPIC'
-    #     # subprocess.run(cmd_connect_NAS, shell=True)
-    #     # print("Connected NAS")
+
+    def init_for_os(self):
+        
+        # Determine the operating system
+        current_os = os.name  # 'nt' for Windows, 'posix' for Linux
+
+        # Load the appropriate path file based on the operating system
+        if current_os == 'nt':  # Windows
+            path_file = 'src/config/windows/paths.json'
+            modules_blender_file = 'src/config/windows/modules_blender.json'
+            modules_post_file = 'src/config/windows/modules_post.json'
+        elif current_os == 'posix':  # Linux
+            path_file = 'src/config/linux/paths.json'
+            modules_blender_file = 'src/config/linux/modules_blender.json'
+            modules_post_file = 'src/config/linux/modules_post.json'
+        else:
+            raise Exception(f"Unsupported operating system: {current_os}")
+
+        # Destination path file (common for both OS)
+        active_path_file = 'src/config/paths.json'
+        active_modules_blender_file = 'src/config/modules_blender.json'
+        active_modules_post_file = 'src/config/modules_post.json'
+
+        # Copy the content of the source path file to the destination path file
+        shutil.copyfile(path_file, active_path_file)
+        shutil.copyfile(modules_blender_file, active_modules_blender_file)
+        shutil.copyfile(modules_post_file, active_modules_post_file)
+
+        with open('src/config/paths.json', 'r') as f:
+            self.paths = json.load(f)
+
+        sys.path.append(self.paths['project_directory'])
+
 
     # DOC: Add paths link to documentation
     def logging_setup(self):
@@ -59,7 +89,7 @@ class FlyByGen:
         :rtype: obj[OutputLogger]
 
         """
-        FlyGenLogger = OutputLogger(paths)
+        FlyGenLogger = OutputLogger(self.paths)
         FlyGenLogger.create_log_file()
         FlyGenLogger.configure_logging()
         FlyGenLogger.log_output_file()
@@ -78,10 +108,12 @@ class FlyByGen:
         :rtype: [str]
 
         """
-        blender_path = paths['blender_path']
-        blend_file = paths['blend_file']
-        bpy_controller = paths['bpy_controller']
-        return f'"{blender_path}" -b "{blend_file}" -P "{bpy_controller}"'
+        blender_path = self.paths['blender_path']
+        blend_file = self.paths['blend_file']
+        bpy_controller = self.paths['bpy_controller']
+        
+        # return [blender_path, "-b", blend_file, "-P", bpy_controller]
+        return [blender_path, "-b", blend_file, "-P", bpy_controller]
 
 
     def set_post_processing_path(self):
@@ -92,15 +124,30 @@ class FlyByGen:
 
             :rtype: [str]
         """
-        post_controller_python = paths["post_controller_python"]
-        post_processing_controller = paths['post_controller_path']
+        post_controller_python = self.paths["post_controller_python"]
+        post_processing_controller = self.paths['post_controller_path']
         return [post_controller_python, post_processing_controller]
 
-    
-    def __init__(self):
+    # BUG: Subprocesses don't terminate in Linux
+    # def cleanup_processes(self):
+    #     # Check for and terminate any remaining subprocesses
+    #     for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+    #         if 'blender' in proc.info['cmdline']:
+    #             logging.warning(f"Terminating detached Blender process: {proc.info['pid']}")
+    #             try:
+    #                 proc.terminate()
+    #             except psutil.NoSuchProcess:
+    #                 pass
 
+    def __init__(self):
+        self.init_for_os()
         FlyGenLogger = self.logging_setup()
+        # BUG: Subprocesses don't terminate in Linux
+        # main_setup = SetUp()
+        # main_setup.check_libraries()
+        # signal.signal(signal.SIGTERM, self.cleanup_processes)
         logging.info("Starting FlyByGen")
+        start_time = time.time()
         # Running blender graphics generator
         blender_command = self.set_blender_paths()
         FlyGenLogger.run_subprocess(blender_command)
@@ -123,6 +170,7 @@ class FlyByGen:
         logging.info(f"Post processing took: {int(post_processing_time/60)}min {(post_processing_time%60)}s")
         logging.info(f"Pipeline ran for: {int(total_time/60)}min {total_time%60}s")
         logging.info("Finished everything")
+
 
 print("Starting FlyByGen!")
 FlyByGen()

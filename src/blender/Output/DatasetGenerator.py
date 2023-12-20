@@ -4,6 +4,9 @@ import sys
 import json
 import logging
 import os
+import subprocess
+import time
+# from src.utils.OutputLogger import OutputLogger
 
 with open('src/config/paths.json', 'r') as f:
     paths = json.load(f)
@@ -98,14 +101,17 @@ class DatasetGenerator:
         gpu_memory_threshold = sum(self.get_gpu_memory_total())
         gpu_memory = gpu_memory_threshold
         logging.info(f"GPU memory available: {gpu_memory}")
+<<<<<<< HEAD
         # Set parameters from Json
         threshold_factor = 2.0
         load_delay = 4
+=======
+        threshold_factor = 2.0
+        load_delay = 2
+>>>>>>> Feature_MultiThreading
         processes = []
         for frame in range(start_frame, end_frame + 1):
             logging.info(f"Rendering frame: {frame}...")
-            bpy.context.scene.frame_set(frame)
-            # Loop through wanted layers for dataset and render each one
             for layer, object_name in render_layers.items():
                 logging.info(f"Rendering layer: {layer}...")
                 frame_output_path = os.path.join(
@@ -183,28 +189,4 @@ class DatasetGenerator:
 
         return max_gpu_memory_usage
 
-# FEATURE: Make the activate and deactivation of materials more flexible
-    def set_rendered_objects(self, material):
-        """
-        Sets the active layers for the render by activating the holdout of different materials
-        
-        Parameters:
-            material (str): Defines the material to be active. Every other material which can be deactivated will be deactivated
 
-        NOTE: This is a hard coded function as the math node numbers to de/activate the material are material specific
-        """
-        if material == "Dust.001":
-            logging.info(f"Set dust channels...")
-            bpy.data.materials["Dust.001"].node_tree.nodes["Math.020"].inputs[0].default_value = 0
-            bpy.data.materials["AsteroidSurface.001"].node_tree.nodes["Math.029"].inputs[0].default_value = 1
-        elif material == "AsteroidSurface.001":
-            logging.info(f"Set nucleus channels...")
-            bpy.data.materials["Dust.001"].node_tree.nodes["Math.020"].inputs[0].default_value = 1
-            bpy.data.materials["AsteroidSurface.001"].node_tree.nodes["Math.029"].inputs[0].default_value = 0
-        elif material == "all":
-            logging.info(f"Set all channels...")
-            bpy.data.materials["Dust.001"].node_tree.nodes["Math.020"].inputs[0].default_value = 0
-            bpy.data.materials["AsteroidSurface.001"].node_tree.nodes["Math.029"].inputs[0].default_value = 0
-        else:
-            logging.error(
-                f"Material {material} is not existing, and thus cannot be rendered. Check that the material was specifed correctly")

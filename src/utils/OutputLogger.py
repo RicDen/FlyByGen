@@ -17,6 +17,7 @@ class OutputLogger:
     def __init__(self, paths):
         if not os.path.exists(paths['cache_dir']):
             os.mkdir(paths['cache_dir'])
+            print(f"Created cache dir")
         self.project_directory = os.path.join(paths['cache_dir'], f"{paths['pipeline_version']}{paths['number_of_generation']}")
         self.log_directory = os.path.join(self.project_directory, paths['log_dir'])
         
@@ -74,6 +75,9 @@ class OutputLogger:
             :type: str
         """
         logging.info("Starting subprocess")
+        print(f"Sub process: {command}")
+        # BUG: Subprocesses don't terminate in Linux use subprocess.Popen on windows and subprocess.
+
         try:
             # BUG: Subprocesses don't terminate in Linux use:
             # process = subprocess.run(
@@ -82,7 +86,8 @@ class OutputLogger:
                 command,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
-                universal_newlines=True
+                text=True,  # This replaces universal_newlines=True in Python 3.7 and later
+                check=False,  # Allow the process to complete even if the return code is non-zero
             )
 
             subprocess_logger = logging.getLogger("subprocess")

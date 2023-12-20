@@ -9,11 +9,11 @@
         "use_pass_object_index": true
     },
     "start_frame": 18,
-    "end_frame" :19,
+    "end_frame" :18,
     "render_layers":{
         "all": "all",
-        "jets": "jets",
-        "nucleus": "nucleus"
+        "jets": "Dust.001",
+        "nucleus": "AsteroidSurface.001"
     },
     "cycles":{
         "experimental": true,
