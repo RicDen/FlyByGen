@@ -87,7 +87,7 @@ class OutputLogger:
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 text=True,  # This replaces universal_newlines=True in Python 3.7 and later
-                check=False,  # Allow the process to complete even if the return code is non-zero
+                # check=False,  # Allow the process to complete even if the return code is non-zero
             )
 
             subprocess_logger = logging.getLogger("subprocess")
