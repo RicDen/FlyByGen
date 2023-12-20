@@ -104,9 +104,24 @@ class FlyByGen:
         # Running blender graphics generator
         blender_command = self.set_blender_paths()
         FlyGenLogger.run_subprocess(blender_command)
-        # Running python post processing
-        post_process_command = self.set_post_processing_path()
-        FlyGenLogger.run_subprocess(post_process_command)
+
+# Need funtion which exectues the subprocess after the parameter range and increments files as defined in function parameter
+# The cache and output paths need to be automatically update accordingly (maybe add date)
+
+        
+
+
+        blender_time = time.time()
+        # # Running python post processing
+        # post_process_command = self.set_post_processing_path()
+        # FlyGenLogger.run_subprocess(post_process_command)
+        post_time = time.time()
+        render = blender_time-start_time
+        post_processing_time = post_time-blender_time
+        total_time = post_time-start_time
+        logging.info(f"Render took: {int(render/60)}min {render%60}s")
+        logging.info(f"Post processing took: {int(post_processing_time/60)}min {(post_processing_time%60)}s")
+        logging.info(f"Pipeline ran for: {int(total_time/60)}min {total_time%60}s")
         logging.info("Finished everything")
 
 print("Starting FlyByGen!")

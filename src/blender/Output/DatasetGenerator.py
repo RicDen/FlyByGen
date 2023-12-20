@@ -95,17 +95,93 @@ class DatasetGenerator:
             logging.error(f"Start frame number must be smaller than end frame number!"+
                       "Check the render.json for the correct definition")
 
-        # Loop through frames and set each one
+        gpu_memory_threshold = sum(self.get_gpu_memory_total())
+        gpu_memory = gpu_memory_threshold
+        logging.info(f"GPU memory available: {gpu_memory}")
+        # Set parameters from Json
+        threshold_factor = 2.0
+        load_delay = 4
+        processes = []
         for frame in range(start_frame, end_frame + 1):
             logging.info(f"Rendering frame: {frame}...")
             bpy.context.scene.frame_set(frame)
             # Loop through wanted layers for dataset and render each one
             for layer, object_name in render_layers.items():
                 logging.info(f"Rendering layer: {layer}...")
-                bpy.context.scene.render.filepath = os.path.join(
-                    output_dir, f"{scene_id}", f"{layer}", f"frame{frame:04d}.png")
-                self.set_rendered_objects(object_name)
-                bpy.ops.render.render(write_still=True)
+                frame_output_path = os.path.join(
+                    output_dir, f"{scene_id}", f"{layer}", f"frame_")
+                logging.info(f"Frame Output path: {frame_output_path}")
+                while True:
+                    time.sleep(load_delay)
+                    video_ram = self.get_gpu_memory_usage()
+                    logging.info(f"Memory utilization: {video_ram}")  
+                    if video_ram and all(mem < gpu_memory_threshold for mem in video_ram):
+                        # GPU memory is below the threshold, start rendering
+                        frame_process = self.render_frame(object_name, frame, frame_output_path)
+                        if gpu_memory_threshold == gpu_memory:
+                            logging.info(f"Setting GPU memory threshold...")
+                            max_gpu_memory_usage = self.get_max_gpu_memory_usage(10)
+                            logging.info(f"Maximum GPU usage is: {max_gpu_memory_usage}")
+                            gpu_memory_threshold = gpu_memory - (max_gpu_memory_usage * threshold_factor)
+                            logging.info(f"GPU memory threshold set to: {gpu_memory_threshold}")
+                        break
+                    
+                    logging.warning("Waiting for GPU memory to become available...")
+                                      
+                processes.append(frame_process)
+                logging.info(f"There are {len(processes)} running.")
+            
+        for process in processes:
+            process.wait()
+            
+
+# TODO: Add path from json
+    def render_frame(self, layer, frame, output_path):
+        render_command = [
+            "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
+            # "/home/dengel_to/Software/blender-3.6.5-linux-x64/blender",
+            "-b", "cache/SetUp_v1-1_001/SpacecraftMotion.blend",
+            "-P", "src/blender/Output/RenderFrame.py",
+            "--", "--cycles-device", "OPTIX", 
+            str(layer), str(frame), str(output_path)
+        ]
+        logging.info(f"Starting subprocess for render")
+        frame_process = subprocess.Popen(
+            render_command
+            )
+        return frame_process
+
+    def get_gpu_memory_usage(self):
+        try:
+            result = subprocess.run(['nvidia-smi', '--query-gpu=memory.used', '--format=csv,nounits,noheader'],
+                                    stdout=subprocess.PIPE, universal_newlines=True)
+            memory_used = [int(x) for x in result.stdout.strip().split('\n')]
+            return memory_used
+        except Exception as e:
+            logging.error(f"Error: {e}")
+            return None
+    def get_gpu_memory_total(self):
+        try:
+            result = subprocess.run(['nvidia-smi', '--query-gpu=memory.free', '--format=csv,nounits,noheader'],
+                                    stdout=subprocess.PIPE, universal_newlines=True)
+            memory_total = [int(x) for x in result.stdout.strip().split('\n')]
+            return memory_total
+        except Exception as e:
+            logging.error(f"Error: {e}")
+            return None
+
+    def get_max_gpu_memory_usage(self, test_duration):
+
+        # Get the current time
+        start_time = time.time()
+        max_gpu_memory_usage = 0
+        # Run the loop for the specified duration
+        while time.time() - start_time < test_duration:
+            if max_gpu_memory_usage < self.get_gpu_memory_usage()[0]:
+                max_gpu_memory_usage = self.get_gpu_memory_usage()[0]
+            time.sleep(0.1)
+
+        return max_gpu_memory_usage
 
 # FEATURE: Make the activate and deactivation of materials more flexible
     def set_rendered_objects(self, material):

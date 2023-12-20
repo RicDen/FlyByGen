@@ -75,6 +75,9 @@ class OutputLogger:
         """
         logging.info("Starting subprocess")
         try:
+            # BUG: Subprocesses don't terminate in Linux use:
+            # process = subprocess.run(
+            # Windows:
             process = subprocess.Popen(
                 command,
                 stdout=subprocess.PIPE,
@@ -86,11 +89,21 @@ class OutputLogger:
             subprocess_logger.setLevel(logging.INFO)
             subprocess_logger.addHandler(logging.StreamHandler())
 
-            for line in process.stdout:
+            # for line in process.stdout.splitlines():
+            # Windows:
+            for line in process.stdout: # 
                 line = line.strip()
                 subprocess_logger.info(line)
 
+            # BUG: Subprocesses don't terminate in Linux use:
+            # return_code = process.returncode
+            # Windows:
             process.wait()
+
+            if return_code == 0:
+                logging.info("Subprocess finished successfully.")
+            else:
+                logging.error(f"Subprocess failed with return code {return_code}")
 
             if process.returncode != 0:
                 logging.error(f"Subprocess failed with return code {process.returncode}")
