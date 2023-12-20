@@ -1,6 +1,6 @@
 {
   "modules": [
-{
+    {
       "class_path": "src\\blender\\Scene\\SceneGen_default.py",
       "module_name": "Scene",
       "class_name": "SceneGenerator"
@@ -14,6 +14,21 @@
       "class_path": "src\\blender\\Object\\NucleusGenerator_basic.py",
       "module_name": "Nucleus",
       "class_name": "NucleusGenerator"
+    },
+    {
+      "class_path": "src\\blender\\Environment\\DustJet_Basic.py",
+      "module_name": "DustJet",
+      "class_name": "DustJetGenerator"
+    },
+    {
+      "class_path": "src\\blender\\Animation\\SpacecraftMotion.py",
+      "module_name": "SpacecraftMotion",
+      "class_name": "SpacecraftMotion"
+    },
+    {
+      "class_path": "src\\blender\\Output\\DatasetGenerator.py",
+      "module_name": "DatasetGenerator",
+      "class_name": "DatasetGenerator"
     }
   ]
 }

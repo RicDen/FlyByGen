@@ -101,14 +101,9 @@ class DatasetGenerator:
         gpu_memory_threshold = sum(self.get_gpu_memory_total())
         gpu_memory = gpu_memory_threshold
         logging.info(f"GPU memory available: {gpu_memory}")
-<<<<<<< HEAD
         # Set parameters from Json
         threshold_factor = 2.0
         load_delay = 4
-=======
-        threshold_factor = 2.0
-        load_delay = 2
->>>>>>> Feature_MultiThreading
         processes = []
         for frame in range(start_frame, end_frame + 1):
             logging.info(f"Rendering frame: {frame}...")
