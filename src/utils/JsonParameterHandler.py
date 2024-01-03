@@ -1,67 +1,45 @@
 import json
-import random
-from copy import deepcopy
-
-class JsonFileHandler:
-    @staticmethod
-    def load_json(file_path):
-        with open(file_path, 'r') as file:
-            return json.load(file)
-
-    @staticmethod
-    def save_json(data, file_path):
-        with open(file_path, 'w') as file:
-            json.dump(data, file, indent=2)
 
 class JsonParameterUpdater:
-    def __init__(self, target_path, range_path, increment_path=None):
-        self.target_path = target_path
-        self.range_path = range_path
-        self.increment_path = increment_path
+    def __init__(self, target_file, adjustment_file):
+        self.target_file = target_file
+        self.adjustment_file = adjustment_file
 
     def update_parameters(self):
-        # Load the target JSON file
-        target_data = JsonFileHandler.load_json(self.target_path)
+        # Load the JSON data from the files
+        with open(self.target_file, 'r') as file:
+            target_data = json.load(file)
 
-        # Load the parameter range JSON files for cores and addons
-        range_data = JsonFileHandler.load_json(self.range_path)
-        increment_data = JsonFileHandler.load_json(self.increment_path) if self.increment_path else None
+        with open(self.adjustment_file, 'r') as file:
+            adjustment_data = json.load(file)
 
-        # Update parameters based on the provided ranges and increments
-        for core in target_data['cores']:
-            self._update_category_parameters(core, range_data['cores'], increment_data['cores'])
+        # Update the parameters based on adjustments
+        self._recursive_update(target_data, adjustment_data)
 
-        # for addon in target_data['addons']:
-        #     self._update_category_parameters(addon, range_data['addons'], increment_data['addons'])
-        print(f"Target data is: {target_data}")
         # Save the updated data back to the target JSON file
-        JsonFileHandler.save_json(target_data, self.target_path)
+        with open(self.target_file, 'w') as file:
+            json.dump(target_data, file, indent=2)
 
-    def _update_category_parameters(self, category_data, range_data, increment_data):
-        for parameter_name, parameter_range in range_data.items():
-            if parameter_name in category_data:
-                increment = increment_data.get(parameter_name, 1) if increment_data else 1
-                current_value = category_data[parameter_name]
+    def _recursive_update(self, target, source):
+        """
+        Recursively update target dictionary with non-dictionary values from the source.
+        """
+        for key, value in source.items():
+            if isinstance(value, dict):
+                # If the value is a dictionary, recursively update
+                target[key] = self._recursive_update(target.get(key, {}), value)
+        # FEATURE: Add warning when the updater json provides a parameter
+            else:
+                # If the value is not a dictionary, update directly
+                target[key] = value
 
-                if isinstance(current_value, list):
-                    new_value = [v + increment for v in current_value]
-                    new_value = [max(min(v, parameter_range['max']), parameter_range['min']) for v in new_value]
-                else:
-                    new_value = current_value + increment
-                    new_value = max(min(new_value, parameter_range['max']), parameter_range['min'])
-
-                category_data[parameter_name] = new_value
+        return target
 
 if __name__ == "__main__":
-    # Example usage
-    target_path = 'nucleus.json'
-    range_path = 'parameter_ranges.json'
-    increment_path = 'increments.json'
+    # Create instances of JsonParameterUpdater for each file type
+    updater_1 = JsonParameterUpdater('nucleus.json', 'nucleus_increments.json')
+    updater_2 = JsonParameterUpdater('dustjet.json', 'dustjet_increments.json')
 
-    # Create an instance of JsonParameterUpdater
-    updater = JsonParameterUpdater(target_path, range_path, increment_path)
-
-    # Update the target JSON file iteratively based on parameter ranges and increments
-    updater.update_parameters()
-
-    print(f"Updated {target_path} iteratively based on {range_path} and {increment_path}")
+    # Call the update_parameters method for each instance
+    updater_1.update_parameters()
+    updater_2.update_parameters()
