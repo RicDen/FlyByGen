@@ -7,6 +7,7 @@ def generate_object_values(parameter_ranges, increments):
     object_values = {}
 
     # Create combinations for all parameters of each object
+
     for obj_name in object_names:
         parameter_names = list(parameter_ranges[obj_name].keys())
         parameter_combinations = product(*[generate_values(parameter_ranges[obj_name][param]['min'],
@@ -20,7 +21,23 @@ def generate_object_values(parameter_ranges, increments):
             index_obj_name = f"{obj_name}_{index}"
             object_values[index_obj_name] = object_value
 
-    return object_values
+    # Create combinations of cores with addons
+    core_combinations = [key for key in object_values.keys() if key.startswith('core')]
+    addon_combinations = [key for key in object_values.keys() if key.startswith('addon')]
+
+    combined_values = {}
+    for core_comb in core_combinations:
+        for addon_comb in addon_combinations:
+
+            combined_key = f"{core_comb}, {addon_comb}"
+            core_values = object_values[core_comb]
+            addon_values = object_values[addon_comb]
+            combined_value = {}
+            combined_value[core_comb] = core_values
+            combined_value[addon_comb] = addon_values
+            combined_values[combined_key] = combined_value
+
+    return combined_values
 
 # Helper function to generate floating-point values
 def generate_values(min_value, max_value, increment):
@@ -31,12 +48,20 @@ def generate_values(min_value, max_value, increment):
 
 # Example usage:
 parameter_ranges = {
-    'core': {'radius': {'min': 1.0, 'max': 3.0}, 'length': {'min': 2.0, 'max': 3.0}},
-    'addon1': {'radius': {'min': 1.5, 'max': 2.5}, 'length': {'min': 1.0, 'max': 3.0}},
+    'core': {'radius': {'min': 1.0, 'max': 3.0}, 'length': {'min': 1.0, 'max': 2.0}},
+    'addon1': {'radius': {'min': 1.5, 'max':2.5}, 'length': {'min': 1.0, 'max': 3.0}},
 }
 
 increments = {'core': {'radius': 1.0, 'length': 1.0}, 'addon1': {'radius': 1.0, 'length': 1.0}}
 
+#
+# parameter_ranges = {
+#     'core': {'radius': {'min': 1.0, 'max': 3.0}, 'length': {'min': 1.0, 'max': 3.0}, 'rotation': [{'min': 1.0, 'max': 3.0},{'min': 2.0, 'max': 3.0}, {'min': 2.0, 'max': 4.0}]},
+#     'addon1': {'radius': {'min': 1.5, 'max': 4.5}, 'length': {'min': 1.0, 'max': 3.0}},
+# }
+#
+# increments = {'core': {'radius': 1.0, 'length': 1.0, 'rotation':[1,1,1]}, 'addon1': {'radius': 1.0, 'length': 1.0}}
+
 combinations = generate_object_values(parameter_ranges, increments)
 for combination in combinations:
-    print(f"{combination}{combinations[combination]}")
+    print(f"{combination}: {combinations[combination]}")
