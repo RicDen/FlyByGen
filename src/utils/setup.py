@@ -7,6 +7,8 @@ class SetUp:
     def check_libraries(self):
         try:
             import psutil
+            # TODO: Add numpy to conda environment
+            # import numpy
             logging.info(f"Loaded python libraries  successfully")
         except:
             logging.error(f"Failed to load. Installing python libraries...")

@@ -141,7 +141,7 @@ class DatasetGenerator:
         render_command = [
             "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
             # "/home/dengel_to/Software/blender-3.6.5-linux-x64/blender",
-            "-b", "cache/SetUp_v1-1_001/SpacecraftMotion.blend",
+            "-b", "cache/ParameterIter_v1-0Laptop_001/SpacecraftMotion.blend",
             "-P", "src/blender/Output/RenderFrame.py",
             "--", "--cycles-device", "OPTIX", 
             str(layer), str(frame), str(output_path)

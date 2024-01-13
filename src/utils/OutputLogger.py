@@ -51,15 +51,27 @@ class OutputLogger:
 
     def configure_logging(self):
         """
-            Configures the logging functionalities
-            Each logging message is stored with a timestamp
+        Configures the logging functionalities
+        Each logging message is stored with a timestamp
         """
-        logging.basicConfig(
-        filename=self.log_file,
-        filemode="w",
-        level=logging.INFO,
-        format="%(asctime)s - %(message)s"
-        )
+        # Create a formatter with the desired log message format
+        formatter = logging.Formatter("%(asctime)s - %(message)s")
+
+        # Create a FileHandler to log messages to a file
+        file_handler = logging.FileHandler(self.log_file, mode="w")
+        file_handler.setFormatter(formatter)
+
+        # Create a StreamHandler to log messages to the console
+        stream_handler = logging.StreamHandler()
+        stream_handler.setFormatter(formatter)
+
+        # Get the root logger and add the handlers
+        root_logger = logging.getLogger()
+        root_logger.setLevel(logging.INFO)
+        root_logger.addHandler(file_handler)
+        root_logger.addHandler(stream_handler)
+
+
 
     def log_output_file(self):
         """
@@ -92,7 +104,9 @@ class OutputLogger:
 
             subprocess_logger = logging.getLogger("subprocess")
             subprocess_logger.setLevel(logging.INFO)
-            subprocess_logger.addHandler(logging.StreamHandler())
+            # Add a StreamHandler only if not already added
+            if not subprocess_logger.handlers:
+                subprocess_logger.addHandler(logging.StreamHandler())
 
             # for line in process.stdout.splitlines():
             # Windows:
@@ -105,10 +119,10 @@ class OutputLogger:
             # Windows:
             process.wait()
 
-            if return_code == 0:
-                logging.info("Subprocess finished successfully.")
-            else:
-                logging.error(f"Subprocess failed with return code {return_code}")
+            # if return_code == 0:
+            #     logging.info("Subprocess finished successfully.")
+            # else:
+            #     logging.error(f"Subprocess failed with return code {return_code}")
 
             if process.returncode != 0:
                 logging.error(f"Subprocess failed with return code {process.returncode}")

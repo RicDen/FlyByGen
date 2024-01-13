@@ -1,8 +1,8 @@
 from itertools import product
-
+import logging
 class ParameterCombinationGenerator:
     def __init__(self):
-        print("Creating all combination according to parameter range and increments...")
+        logging.info("Creating all combination according to parameter range and increments...")
         # combinations_nucleus = self.generate_parameter_combinations(parameter_range_data, increments_data)
         # print("Combination of all objects within the range:")
         # for combination in combinations_nucleus:
@@ -13,7 +13,7 @@ class ParameterCombinationGenerator:
             if isinstance(increments[param], float) or isinstance(increments[param], int):
                 generated_values.append(self.generate_values_from_range(params[param], increments[param]))
             elif isinstance(params[param], list):
-                print("Vector in form of list provided")
+                logging.info("Vector in form of list provided")
                 vector = []
                 for (i, value) in enumerate(params[param]):
                     vector.append(self.generate_values_from_range(value, increments[param][i]))
@@ -21,7 +21,7 @@ class ParameterCombinationGenerator:
                 generated_values.append(permutations)
                 # and created all list option
             else:
-                print("Error: Invalid parameters")
+                logging.info("Error: Invalid parameters")
         return product(*generated_values)
 
     def assign_value_names(self, parameter_combinations, params):

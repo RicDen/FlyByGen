@@ -1,0 +1,15 @@
+{
+  "cores":
+  {
+    "core":
+    {
+    "radius": 2
+    }
+  ,
+  
+    "addon1":
+    {
+    "radius": 1.0
+    }
+  }
+}
