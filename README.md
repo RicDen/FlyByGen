@@ -53,7 +53,7 @@ Currently, the pipeline provides the following functionalities:
 - [SetUp](#setup)
 - [Usage](#usage)
 - [Documentation](#documentation)
-- [Credits](#credits)
+- [Credits and Acknowledgments](#credits-and-acknowledgments)
 - [License](#license)
 - [Planned features](#planned-features)
 - [Tests](#tests)
@@ -121,8 +121,11 @@ The documentation for this project is created with sphinx and can be found in th
 Adapt make.bat for windows systems or makefile for linux based systems to use the right sphinx build options when blender is part of the toolchain or not.
 If blender is used in the toolchain, adapt the path in line 8 of the makefile and make.bat to suit your blender path. 
 
-## Credits
-This tool was written by Ric Dengel with support of Mihkel Pajusalu within the scope of the PhD work and co-sponsored through an [activity](https://activities.esa.int/4000141651) within the European Space Agency OSIP program. 
+## Credits and Acknowledgments
+This tool was developed by Ric Dengel and Mihkel Pajusalu within the scope of Ric Denge's PhD and the Comet-Interceptor OPIC projects.
+
+Ric Dengel's work was co-sponsored through [activity 4000141651](https://activities.esa.int/4000141651) within the European Space Agency OSIP program. 
+Mihkel Pajusalu's work was financed by Estonian Research Council project RVTT7 "[ESA Science Consortium of Estonia](https://www.etis.ee/Portal/Projects/Display/c006f483-41d9-45a7-83d6-4e34ae7d2b68)"
 <!-- The work is also described in TBD (TODO: add article link) -->
 
 This work also would not have been possible without the Blender open source community.
