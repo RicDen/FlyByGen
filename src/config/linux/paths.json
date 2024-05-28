@@ -22,12 +22,12 @@
 
     "blender_modules_path": "src/config/modules_blender.json",
     "post_modules_path": "src/config/modules_post.json",
-    "nucleus_config": "src/config/nucleus.json",
-    "dustjet_config": "src/config/dustjets.json",
-    "spacecraftAnimation_config": "src/config/animation_spacecraft.json",
-    "render_configs": "src/config/render.json", 
+    "nucleus_config": "src/config/blender/nucleus.json",
+    "dustjet_config": "src/config/blender/dustjets.json",
+    "spacecraftAnimation_config": "src/config/blender/animation_spacecraft.json",
+    "render_configs": "src/config/blender/render.json", 
     
-    "noise_config": "src/config/noise.json",
-    "mask_config": "src/config/mask_config.json"
+    "noise_config": "src/config/PyPostProcessor/noise.json",
+    "mask_config": "src/config/PyPostProcessor/mask_config.json"
 
 }
