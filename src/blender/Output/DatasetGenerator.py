@@ -89,8 +89,12 @@ class DatasetGenerator:
                 }
 
         """
+        scene_id = f"{paths["pipeline_version"]}{paths["number_of_generation"]}"
+        logging.info(f"Scene ID: {scene_id}")
         # Set the output directory for saving images
-        scene_id = paths["dataset_scene"]
+
+
+        combination_id = paths["combination"]
         start_frame = parameters["start_frame"]
         end_frame = parameters["end_frame"]
         render_layers = parameters["render_layers"]
@@ -110,7 +114,7 @@ class DatasetGenerator:
             for layer, object_name in render_layers.items():
                 logging.info(f"Rendering layer: {layer}...")
                 frame_output_path = os.path.join(
-                    output_dir, f"{scene_id}", f"{layer}", f"frame_")
+                    output_dir, f"{scene_id}",f"{combination_id}", f"{layer}", f"frame_")
                 logging.info(f"Frame Output path: {frame_output_path}")
                 while True:
                     time.sleep(load_delay)
@@ -137,16 +141,22 @@ class DatasetGenerator:
             
 
 # TODO: Add path from json
+# TODO: Fix blender path to automatic one
+# TODO: Add according file saves to test instead of renders.
+
     def render_frame(self, layer, frame, output_path):
         render_command = [
-            "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
+            "blender",
             # "/home/dengel_to/Software/blender-3.6.5-linux-x64/blender",
-            "-b", "cache/ParameterIter_v1-0Laptop_001/SpacecraftMotion.blend",
-            "-P", "src/blender/Output/RenderFrame.py",
-            "--", "--cycles-device", "OPTIX", 
-            str(layer), str(frame), str(output_path)
+            # TODO: Path wrong
+            "-b", paths['render_file'],
+            "-P", paths['render_executable'],
+            "--", "--cycles-device", "OPTIX", str(layer), str(frame), str(output_path)
         ]
-        logging.info(f"Starting subprocess for render")
+        # os.mkdir("/mnt/DatasetCache/Cache/SetUp_v1-2_DesktopLinux_001/")
+        # with open(f"{str(output_path)}/{str(layer)}/{str(frame)}.png", 'w') as file:
+        #         json.dump(render_command,file, indent=2)
+        # logging.info(f"Starting subprocess for render")
         frame_process = subprocess.Popen(
             render_command
             )

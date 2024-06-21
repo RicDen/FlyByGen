@@ -28,7 +28,6 @@ This includes:
 
 """
 
-from src.utils.OutputLogger import OutputLogger
 import json
 import sys
 import os
@@ -39,7 +38,6 @@ import time
 
 # BUG: Subprocesses don't terminate in Linux
 # from src.utils.setup import SetUp
-from src.utils.JsonParameterHandler import JsonParameterUpdater
 # import signal
 # import psutil
 
@@ -153,7 +151,7 @@ class FlyByGen:
 
 
     def __init__(self):
-        self.init_for_os()
+        # self.init_for_os()
         self.FlyGenLogger = self.logging_setup()
         # BUG: Subprocesses don't terminate in Linux
         # main_setup = SetUp()
@@ -181,4 +179,8 @@ class FlyByGen:
 
 
 # print("Starting FlyByGen!")
+FlyByGen.init_for_os(FlyByGen)
+
+from src.utils.OutputLogger import OutputLogger
+from src.utils.JsonParameterHandler import JsonParameterUpdater
 FlyByGen()

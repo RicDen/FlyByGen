@@ -3,6 +3,9 @@ import logging
 
 from src.utils.ParameterCombinationGenerator import ParameterCombinationGenerator
 
+with open('src/config/paths.json', 'r') as f:
+    paths = json.load(f)
+
 class JsonParameterUpdater:
     def __init__(self, target_file, parameter_range_file, increments_file, OutputLogging):
         self.target_file = target_file
@@ -25,6 +28,7 @@ class JsonParameterUpdater:
         self.adjustment_data = ParamCombiner.generate_parameter_combinations(parameter_range_data, increments_data)
         logging.info(f"Created all configurations combinations.")
         return self.adjustment_data, self.target_data
+
     def run_parameter_combinations(self, adjustment_data, target_data, cmd):
         # Update the parameters based on adjustments
         for i,update in enumerate(adjustment_data):
@@ -34,7 +38,23 @@ class JsonParameterUpdater:
             # Save the updated data back to the target JSON file
             with open(self.target_file, 'w') as file:
                 json.dump(target_data, file, indent=2)
+                logging.info(f"Updated target file with new values: {target_data}")
             # Simulate processing
+            # TODO Add creation of path and name for specific parameter combination
+            
+            logging.info(f"Original paths file: {paths}")
+            for key, value in paths.items():
+                if key == "combination":
+                    # If the value is a dictionary, recursively update
+                    logging.info("Combination key found, updating value")
+                    paths[key] = f"comb_{i}"
+                # FEATURE: Add warning when the updater json provides a parameter
+                
+            logging.info(f"Updated paths file: {paths}")
+            with open('src/config/paths.json', 'w') as file:
+                json.dump(paths, file, indent=2)
+                logging.info(f"Updated paths file: {paths}")
+
             self.OutputLogging.run_subprocess(cmd)
         logging.info(f"Finished running all combinations")
 

@@ -8,14 +8,15 @@
     "post_controller_path": "src/postProcessing/control_postProcessing.py",
 
     "cache_dir": "cache/",
-    "number_of_generation": "001",
-    "pipeline_version": "SetUp_v1-1_",
+    "number_of_generation": "DesktopLinux_002",
+    "pipeline_version": "SetUp_v1-2_",
+    "combination": "10",
     "log_dir": "logs/",
 
     "dataset_cache": "dataset/cache/",
     "dataset_output": "dataset/",
-    "dataset_scene": "SetUp_v1-1/",
-    "mask_out": "mask/SetUp_v1-1/",
+    "dataset_scene": "SetUp_v1-2_DesktopLinux_001/",
+    "mask_out": "mask/SetUp_v1-2_DesktopLinux_001/",
     "post_processing_basis": "all/",
     "noise_output": "noise",
     "post_processing_output": "out/",
@@ -26,6 +27,7 @@
     "dustjet_config": "src/config/blender/dustjets.json",
     "spacecraftAnimation_config": "src/config/blender/animation_spacecraft.json",
     "render_configs": "src/config/blender/render.json", 
+"render_executable": "src/blender/Output/RenderFrame.py",
     
     "noise_config": "src/config/PyPostProcessor/noise.json",
     "mask_config": "src/config/PyPostProcessor/mask_config.json"
