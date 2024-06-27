@@ -27,8 +27,8 @@ class MaskGenerator:
         self.image_shape = (render_params["output_format"]["resolution_x"], render_params["output_format"]["resolution_y"])
 
         # Define input and output directories
-        input_dir = f"{paths['dataset_cache']}{paths['dataset_scene']}"
-        self.output_dir = f"{paths['dataset_cache']}{paths['mask_out']}"
+        input_dir = f"{paths['dataset_cache']}{paths["pipeline_version"]+paths["number_of_generation"]}"
+        self.output_dir = f"{paths['dataset_cache']}{paths['mask_out']}{paths["pipeline_version"]+paths["number_of_generation"]}"
 
         
         self.process_all_image_types(input_dir)

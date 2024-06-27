@@ -8,17 +8,18 @@
     "post_controller_path": ".\\src\\postProcessing\\control_postProcessing.py",
 
     "cache_dir": "cache\\",
-    "number_of_generation": "Laptop_001",
-    "pipeline_version": "SetUp_v1-1_",
+    "number_of_generation": "DesktopWindows_001",
+    "pipeline_version": "SetUp_v1-2_",
+    "combination": "0",
     "log_dir": "logs\\",
 
-    "dataset_cache": "Z:\\FLYBY_GEN\\dataset\\cache\\",
-    "dataset_output": "Z:\\FLYBY_GEN\\dataset\\",
-    "dataset_scene": "SetUp_v1-1_Laptop_001\\",
-    "mask_out": "mask/SetUp_v1-1_Laptop_001\\",
+    "render_file" : "cache\\SetUp_v1-2_DesktopLinux_005\\SpacecraftMotion.blend",
+    "dataset_cache": "Z:\\FLYBY_GEN_v1-2\\dataset\\cache\\",
+    "dataset_output": "dataset\\",
+    "mask_out": "mask\\",
     "post_processing_basis": "all\\",
     "noise_output": "noise",
-    "post_processing_output": "Z:\\FLYBY_GEN\\out\\",
+    "post_processing_output": "out\\",
 
     "blender_modules_path": "src/config/modules_blender.json",
     "post_modules_path": "src/config/modules_post.json",
@@ -26,6 +27,7 @@
     "dustjet_config": "src/config/blender/dustjets.json",
     "spacecraftAnimation_config": "src/config/blender/animation_spacecraft.json",
     "render_configs": "src/config/blender/render.json", 
+    "render_executable": "src/blender/Output/RenderFrame.py",
     
     "noise_config": "src/config/PyPostProcessor/noise.json",
     "mask_config": "src/config/PyPostProcessor/mask_config.json"

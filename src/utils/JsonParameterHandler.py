@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 
 from src.utils.ParameterCombinationGenerator import ParameterCombinationGenerator
 
@@ -50,10 +51,15 @@ class JsonParameterUpdater:
                     paths[key] = f"comb_{i}"
                 # FEATURE: Add warning when the updater json provides a parameter
                 
-            logging.info(f"Updated paths file: {paths}")
             with open('src/config/paths.json', 'w') as file:
                 json.dump(paths, file, indent=2)
                 logging.info(f"Updated paths file: {paths}")
+            meta_param_path = os.path.join((paths["dataset_cache"]+paths["pipeline_version"]+paths["number_of_generation"]),paths["combination"])
+            os.makedirs(meta_param_path, exist_ok=True)
+            meta_param_file = os.path.join(meta_param_path,"meta_param.json")
+            with open(meta_param_file, 'w') as file:
+                json.dump(target_data, file, indent=2)
+                logging.info(f"Saved parameter meta to file: {meta_param_file}")
 
             self.OutputLogging.run_subprocess(cmd)
         logging.info(f"Finished running all combinations")

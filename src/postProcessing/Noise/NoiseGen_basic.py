@@ -28,7 +28,7 @@ class BasicNoiseGenerator:
             noise_params = json.load(json_file)
         with open(paths['render_configs']) as json_file:
             render_params = json.load(json_file)
-        self.dataset_folder = paths["dataset_cache"]+paths["dataset_scene"]
+        self.dataset_folder = paths["dataset_cache"]+paths["pipeline_version"]+paths["number_of_generation"]
         self.processing_basis = paths["post_processing_basis"]
         self.processing_output = paths["noise_output"]
         self.image_shape = (render_params["output_format"]["resolution_x"], render_params["output_format"]["resolution_y"])

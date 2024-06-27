@@ -89,11 +89,8 @@ class DatasetGenerator:
                 }
 
         """
-        scene_id = f"{paths["pipeline_version"]}{paths["number_of_generation"]}"
-        logging.info(f"Scene ID: {scene_id}")
         # Set the output directory for saving images
-
-
+        scene_id = paths["pipeline_version"]+paths["number_of_generation"]
         combination_id = paths["combination"]
         start_frame = parameters["start_frame"]
         end_frame = parameters["end_frame"]
@@ -145,6 +142,7 @@ class DatasetGenerator:
 # TODO: Add according file saves to test instead of renders.
 
     def render_frame(self, layer, frame, output_path):
+        paths
         render_command = [
             "blender",
             # "/home/dengel_to/Software/blender-3.6.5-linux-x64/blender",
@@ -153,10 +151,7 @@ class DatasetGenerator:
             "-P", paths['render_executable'],
             "--", "--cycles-device", "OPTIX", str(layer), str(frame), str(output_path)
         ]
-        # os.mkdir("/mnt/DatasetCache/Cache/SetUp_v1-2_DesktopLinux_001/")
-        # with open(f"{str(output_path)}/{str(layer)}/{str(frame)}.png", 'w') as file:
-        #         json.dump(render_command,file, indent=2)
-        # logging.info(f"Starting subprocess for render")
+        logging.info(f"Starting subprocess for render")
         frame_process = subprocess.Popen(
             render_command
             )
