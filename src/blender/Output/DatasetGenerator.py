@@ -136,17 +136,10 @@ class DatasetGenerator:
         for process in processes:
             process.wait()
             
-
-# TODO: Add path from json
-# TODO: Fix blender path to automatic one
-# TODO: Add according file saves to test instead of renders.
-
     def render_frame(self, layer, frame, output_path):
         paths
         render_command = [
             "blender",
-            # "/home/dengel_to/Software/blender-3.6.5-linux-x64/blender",
-            # TODO: Path wrong
             "-b", paths['render_file'],
             "-P", paths['render_executable'],
             "--", "--cycles-device", "OPTIX", str(layer), str(frame), str(output_path)

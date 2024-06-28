@@ -52,7 +52,6 @@ class MaskGenerator:
             for object_dir in object_dirs:
                 object_images = [f for f in os.listdir(os.path.join(input_dir, object_dir)) if f.endswith(".png")]
                 mask_image_paths.extend([os.path.join(input_dir, object_dir, image) for image in object_images])
-        #TODO return image type with each path
         return mask_image_paths
 
     def create_mask(self, image_path, image_type):
