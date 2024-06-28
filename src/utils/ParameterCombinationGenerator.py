@@ -132,33 +132,33 @@ class ParameterCombinationGenerator:
 
         return recursive_list
         
-        def generate_values_from_range(self, param, increment):
-            """
-            Generate a list of values from a given range and increment.
+    def generate_values_from_range(self, param, increment):
+        """
+        Generate a list of values from a given range and increment.
 
-            Args:
-                param (dict): A dictionary containing the range of values.
-                increment (float): The increment value.
+        Args:
+            param (dict): A dictionary containing the range of values.
+            increment (float): The increment value.
 
-            Returns:
-                list: A list of values.
+        Returns:
+            list: A list of values.
 
-            """
-            # Get the minimum and maximum values from the range
-            min_value = param.get('min', 0)
-            max_value = param.get('max', 0)
-            current_value = min_value
-            values = []
-            # Generate values within the range
-            while current_value <= max_value:
-                values.append(current_value)
-                # If the current value is a dictionary, stop generating values
-                if isinstance(current_value, dict):
-                    break
-                else:
-                    # Increment the current value
-                    current_value += increment
-            return values
+        """
+        # Get the minimum and maximum values from the range
+        min_value = param.get('min', 0)
+        max_value = param.get('max', 0)
+        current_value = min_value
+        values = []
+        # Generate values within the range
+        while current_value <= max_value:
+            values.append(current_value)
+            # If the current value is a dictionary, stop generating values
+            if isinstance(current_value, dict):
+                break
+            else:
+                # Increment the current value
+                current_value += increment
+        return values
 
 
 

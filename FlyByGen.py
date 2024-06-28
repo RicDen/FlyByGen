@@ -37,7 +37,7 @@ import subprocess
 import time
 
 # BUG: Subprocesses don't terminate in Linux
-# from src.utils.setup import SetUp
+from src.utils.setup import SetUp
 # import signal
 # import psutil
 
@@ -151,11 +151,10 @@ class FlyByGen:
 
 
     def __init__(self):
-        # self.init_for_os()
         self.FlyGenLogger = self.logging_setup()
         # BUG: Subprocesses don't terminate in Linux
-        # main_setup = SetUp()
-        # main_setup.check_libraries()
+        main_setup = SetUp()
+        main_setup.check_libraries()
         # signal.signal(signal.SIGTERM, self.cleanup_processes)
         logging.info("Starting FlyByGen")
         logging.info("Test print")
@@ -165,9 +164,9 @@ class FlyByGen:
         blender_command = self.set_blender_paths()
         self.run_graphics_module(blender_command, config_path)
         blender_time = time.time()
-        # # Running python post processing
-        # post_process_command = self.set_post_processing_path()
-        # FlyGenLogger.run_subprocess(post_process_command)
+        # Running python post processing
+        post_process_command = self.set_post_processing_path()
+        self.FlyGenLogger.run_subprocess(post_process_command)
         post_time = time.time()
         render = blender_time-start_time
         post_processing_time = post_time-blender_time
