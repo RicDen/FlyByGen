@@ -107,7 +107,9 @@ class MaskGenerator:
         image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
         
         # Create a mask by setting all non-zero pixels in the image to the given image_type value
-        mask = np.where((image != 0), image_type, 0)
+        # BUG: Quickfix for background dust from plasma, needs to be fixed in the render
+        mask = np.where((image > 1), image_type, 0)
+        
         
         return mask
 
