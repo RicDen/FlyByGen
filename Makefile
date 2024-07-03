@@ -6,11 +6,11 @@
 # from the environment for the first two.
 SPHINXOPTS    ?=
 # adapted sphinx build: use when blender is used and adapter to the path to blender installation
-SPHINXBUILD   ?= "C://Program Files//Blender Foundation//Blender 3.4//blender.exe" --background --python docs/src/blender_sphinx.py --
+SPHINXBUILD   ?= blender --background --python docs/src/blender_sphinx.py --
 # standard sphinx build: use when blender is not part of the tool chain
 # SPHINXBUILD   ?= sphinx-build
-SOURCEDIR     = source
-BUILDDIR      = build
+SOURCEDIR     = docs/src
+BUILDDIR      = docs/build
 
 # Put it first so that "make" without argument is like "make help".
 help:

@@ -90,7 +90,8 @@ class DatasetGenerator:
 
         """
         # Set the output directory for saving images
-        scene_id = paths["dataset_scene"]
+        scene_id = paths["pipeline_version"]+paths["number_of_generation"]
+        combination_id = paths["combination"]
         start_frame = parameters["start_frame"]
         end_frame = parameters["end_frame"]
         render_layers = parameters["render_layers"]
@@ -110,7 +111,7 @@ class DatasetGenerator:
             for layer, object_name in render_layers.items():
                 logging.info(f"Rendering layer: {layer}...")
                 frame_output_path = os.path.join(
-                    output_dir, f"{scene_id}", f"{layer}", f"frame_")
+                    output_dir, f"{scene_id}",f"{combination_id}", f"{layer}", f"frame_")
                 logging.info(f"Frame Output path: {frame_output_path}")
                 while True:
                     time.sleep(load_delay)
@@ -135,16 +136,13 @@ class DatasetGenerator:
         for process in processes:
             process.wait()
             
-
-# TODO: Add path from json
     def render_frame(self, layer, frame, output_path):
+        paths
         render_command = [
-            "C:\\Program Files\\Blender Foundation\\Blender 3.6\\blender.exe",
-            # "/home/dengel_to/Software/blender-3.6.5-linux-x64/blender",
-            "-b", "cache/SetUp_v1-1_001/SpacecraftMotion.blend",
-            "-P", "src/blender/Output/RenderFrame.py",
-            "--", "--cycles-device", "OPTIX", 
-            str(layer), str(frame), str(output_path)
+            "blender",
+            "-b", paths['render_file'],
+            "-P", paths['render_executable'],
+            "--", "--cycles-device", "OPTIX", str(layer), str(frame), str(output_path)
         ]
         logging.info(f"Starting subprocess for render")
         frame_process = subprocess.Popen(

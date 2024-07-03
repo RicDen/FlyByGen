@@ -15,6 +15,7 @@ build/
 
 # other files
 .ideas/
+.idea/
 *_pycache__/
 .vscode/
 

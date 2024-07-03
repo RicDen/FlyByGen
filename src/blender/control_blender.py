@@ -3,7 +3,6 @@ Run the full workflow
 Include setting up of scene, adapting parameters, rendering and deleting of scene for next generation.
 Tasks:
 '''
-# TODO: Update architecture
 
 # FEATURE: Create way to create fundamental base script with all materials included
 import bpy
@@ -89,7 +88,6 @@ class BlenderControl:
             class_path = module["class_path"]
             module_name = module["module_name"]
             class_name = module["class_name"]
-            # TODO: Each module shall have a start and finish message
             single_module = ModuleManager(class_path, module_name, class_name)
             module_instance = single_module.get_instance()
             logging.info(f"Loaded: {module_name}")

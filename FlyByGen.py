@@ -28,7 +28,6 @@ This includes:
 
 """
 
-from src.utils.OutputLogger import OutputLogger
 import json
 import sys
 import os
@@ -38,7 +37,7 @@ import subprocess
 import time
 
 # BUG: Subprocesses don't terminate in Linux
-# from src.utils.setup import SetUp
+from src.utils.setup import SetUp
 # import signal
 # import psutil
 
@@ -139,22 +138,35 @@ class FlyByGen:
     #             except psutil.NoSuchProcess:
     #                 pass
 
+
+    def run_graphics_module(self, cmd, config_path = None):
+
+        # FEATURE: run combinations of multiple config file data contents
+        if not config_path == None:
+            logging.info(f"Received config_path_list")
+            config_data = JsonParameterUpdater(config_path[0], config_path[1], config_path[2], self.FlyGenLogger)
+            adjustment_data, target_data = config_data.create_parameter_combinations()
+            config_data.run_parameter_combinations(adjustment_data, target_data, cmd)
+        # Set config
+
+
     def __init__(self):
-        self.init_for_os()
-        FlyGenLogger = self.logging_setup()
+        self.FlyGenLogger = self.logging_setup()
         # BUG: Subprocesses don't terminate in Linux
-        # main_setup = SetUp()
-        # main_setup.check_libraries()
+        main_setup = SetUp()
+        main_setup.check_libraries()
         # signal.signal(signal.SIGTERM, self.cleanup_processes)
         logging.info("Starting FlyByGen")
+        logging.info("Test print")
         start_time = time.time()
-        # Running blender graphics generator
+        # Run Graphics Module
+        config_path = ["src/config/blender/nucleus.json", "src/config/blender/nucleus_parameter_ranges.json", "src/config/blender/nucleus_increments.json"]
         blender_command = self.set_blender_paths()
-        FlyGenLogger.run_subprocess(blender_command)
+        self.run_graphics_module(blender_command, config_path)
         blender_time = time.time()
-        # # Running python post processing
-        # post_process_command = self.set_post_processing_path()
-        # FlyGenLogger.run_subprocess(post_process_command)
+        # Running python post processing
+        post_process_command = self.set_post_processing_path()
+        self.FlyGenLogger.run_subprocess(post_process_command)
         post_time = time.time()
         render = blender_time-start_time
         post_processing_time = post_time-blender_time
@@ -165,5 +177,9 @@ class FlyByGen:
         logging.info("Finished everything")
 
 
-print("Starting FlyByGen!")
+# print("Starting FlyByGen!")
+FlyByGen.init_for_os(FlyByGen)
+
+from src.utils.OutputLogger import OutputLogger
+from src.utils.JsonParameterHandler import JsonParameterUpdater
 FlyByGen()

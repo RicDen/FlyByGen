@@ -11,7 +11,6 @@ with open('src/config/paths.json', 'r') as f:
 sys.path.append(paths['project_directory'])
 
 
-# FEATURE: Add option to create bodies within range of parameters
 # FEATURE: Check how the cores overlap and test if reasonable
 # FEATURE: parameter range and automatic adaption of for example displacement of texture depending on comet size
 
@@ -40,11 +39,8 @@ class NucleusGenerator:
         cores = self.create_and_merge_cores_from_json(
             core_config)
         
-        logging.info(f"Core remesh values: {core_config['cores'][1]}")
-
         # FEATURE Enhance json file modularity
-        for core_data in core_config["cores"]:
-            core_name = core_data["name"]
+        for core_name, core_data in core_config["cores"].items():
             try: 
                 cores[core_name]
                 core = cores[core_name]
@@ -92,8 +88,7 @@ class NucleusGenerator:
         core_objects = {}
 
         # Create cores and perform operations
-        for core_data in core_config['cores']:
-            core_name = core_data['name']
+        for core_name, core_data in core_config["cores"].items():
             subdiv = core_data['subdiv']
             radius = core_data['radius']
             translation = core_data['translation']
