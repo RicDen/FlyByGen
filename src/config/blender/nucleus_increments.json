@@ -3,13 +3,18 @@
   {
     "core":
     {
-    "radius": 2
+    "radius": 2,
+    "translation": [
+      2,
+      2,
+      2
+    ]
     }
-  ,
-  
-    "addon1":
-    {
-    "radius": 1.0
-    }
+    ,
+    
+      "addon1":
+      {
+      "radius": 1.0
+      }
   }
 }
