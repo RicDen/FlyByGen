@@ -21,9 +21,9 @@
       "class_name": "DustJetGenerator"
     },
     {
-      "class_path": "src/blender/Animation/SpacecraftMotion.py",
-      "module_name": "SpacecraftMotion",
-      "class_name": "SpacecraftMotion"
+      "class_path": "src/blender/Animation/CameraFieldSweeper.py",
+      "module_name": "CameraField",
+      "class_name": "CameraFieldSweeper"
     },
     {
       "class_path": "src/blender/Output/DatasetGenerator.py",
