@@ -3,6 +3,7 @@ import math
 import json
 import os
 import logging
+import random
 
 # config = {
 #   "camera": "Camera",
@@ -55,6 +56,7 @@ class CameraFieldSweeper:
         self.fov = config["fov"]
         self.clip_start = config["clip_start"]
         self.clip_end = config["clip_end"]
+        self.randomization = config["randomization"]
         
 
     def sweep(self):
@@ -62,7 +64,6 @@ class CameraFieldSweeper:
         self.camera_distances = range(self.camera_closest[0], self.camera_furthest[0], self.speed)
         self.azimuth_angles = range(self.azimuth_range[0], self.azimuth_range[1], self.azimuth_steps)
         self.elevation_angles = range(self.elevation_range[0], self.elevation_range[1], self.elevation_steps)
-        logging.info(f"Azimuth angles: {self.azimuth_angles}")
         frame_count = 0
         for distance in self.camera_distances:
             for azimuth in self.azimuth_angles:
@@ -77,6 +78,10 @@ class CameraFieldSweeper:
                     logging.info(f"Camera Location: {self.obj_camera.location}")
                     logging.info(f"Camera Rotation: {self.obj_camera.rotation_euler}")
                     # Adjust rotation incrementally
+                    # FEATURE: Randomize the order of the angles
+                    
+                    azimuth += random.uniform(-self.randomization, self.randomization)
+                    elevation += random.uniform(-self.randomization, self.randomization)
                     self.obj_camera.rotation_euler[2] += math.radians(azimuth)
                     self.obj_camera.rotation_euler[0] += math.radians(elevation)
                     

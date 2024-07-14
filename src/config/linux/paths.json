@@ -26,6 +26,7 @@
     "nucleus_config": "src/config/blender/nucleus.json",
     "dustjet_config": "src/config/blender/dustjets.json",
     "spacecraftAnimation_config": "src/config/blender/animation_spacecraft.json",
+    "CameraFieldSweep_config": "src/config/blender/animation_CameraFieldSweep.json",
     "render_configs": "src/config/blender/render.json", 
 "render_executable": "src/blender/Output/RenderFrame.py",
     

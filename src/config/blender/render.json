@@ -59,7 +59,7 @@
     },
     "framerange":{
         "frame_start": 0,
-        "frame_end": 480,
+        "frame_end": 971,
         "frame_step": 1,
         "use_multiview": false
     }

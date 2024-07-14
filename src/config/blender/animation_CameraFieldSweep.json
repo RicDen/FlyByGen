@@ -14,5 +14,6 @@
   "clip_end": 100000,
   "speed": 160,
   "fps": 24,
-  "exposure": 40E-6
+  "exposure": 40E-6,
+  "randomization": 0.5
 }
