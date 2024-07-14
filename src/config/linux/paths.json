@@ -9,17 +9,16 @@
 
     "cache_dir": "cache/",
     "number_of_generation": "DesktopLinux_001",
-    "pipeline_version": "SetUp_v1-2_",
+    "pipeline_version": "SetUp_v1-3_",
     "combination": "0",
     "log_dir": "logs/",
 
-    "render_file" : "cache/SetUp_v1-2_DesktopLinux_005/SpacecraftMotion.blend",
+    "render_file" : "cache/SetUp_v1-3_DesktopLinux_001/CameraField.blend",
     "dataset_cache": "/mnt/DatasetCache/Cache/",
-    "dataset_output": "dataset/",
-    "mask_out": "mask/",
+    "dataset_output": "/mnt/DatasetCache/Output/",
+    "mask_out": "masks/",
     "post_processing_basis": "all/",
     "noise_output": "noise",
-    "post_processing_output": "out/",
 
     "blender_modules_path": "src/config/modules_blender.json",
     "post_modules_path": "src/config/modules_post.json",

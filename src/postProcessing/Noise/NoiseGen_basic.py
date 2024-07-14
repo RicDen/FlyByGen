@@ -28,7 +28,8 @@ class BasicNoiseGenerator:
             noise_params = json.load(json_file)
         with open(paths['render_configs']) as json_file:
             render_params = json.load(json_file)
-        self.dataset_folder = paths["dataset_cache"]+paths["pipeline_version"]+paths["number_of_generation"]
+        self.dataset_cache = paths["dataset_cache"]+paths["pipeline_version"]+paths["number_of_generation"]
+        self.dataset_output = paths["dataset_output"]+paths["pipeline_version"]+paths["number_of_generation"]
         self.processing_basis = paths["post_processing_basis"]
         self.processing_output = paths["noise_output"]
         self.image_shape = (render_params["output_format"]["resolution_x"], render_params["output_format"]["resolution_y"])
@@ -85,7 +86,7 @@ class BasicNoiseGenerator:
         noise_sp = np.clip(noise_sp, 0, 255).astype(np.uint8)
         return noise_sp
 
-    def store_noises(self, image_filename, noise_list):
+    def store_noises(self, folder, image_filename, noise_list):
         """
             Save each created noise array as image separately
 
@@ -95,14 +96,14 @@ class BasicNoiseGenerator:
             :type: list
         """
         for noise, noise_type in noise_list:
-            noise_type_dir = os.path.join(self.dataset_folder, f"noise_{noise_type}")
+            noise_type_dir = os.path.join(self.dataset_cache, folder, f"noise_{noise_type}")
             if not os.path.exists(noise_type_dir):
                 os.makedirs(noise_type_dir)
             noise_path = os.path.join(noise_type_dir, image_filename)
             cv2.imwrite(noise_path, noise)
             logging.info(f"Noise saved to {noise_path}")
 
-    def store_noisy_images(self, image_filename, noisy_image_list):
+    def store_noisy_images(self, folder, image_filename, noisy_image_list):
         """
             Save each create image with noise as image separately
 
@@ -112,7 +113,7 @@ class BasicNoiseGenerator:
             :type: list
         """
         for noisy_image, noise_type in noisy_image_list:
-            noisy_image_type_image_dir = os.path.join(self.dataset_folder, f"all_noise_{noise_type}")
+            noisy_image_type_image_dir = os.path.join(self.dataset_output, folder, f"all_noise_{noise_type}")
             if not os.path.exists(noisy_image_type_image_dir):
                 os.makedirs(noisy_image_type_image_dir)
             noisy_image_path = os.path.join(noisy_image_type_image_dir, image_filename)
@@ -149,7 +150,7 @@ class BasicNoiseGenerator:
 
 
 # FEATURE: Allow to apply multiple different noise configs per run
-    def apply_noise_to_dataset(self, image_filename, noise_config):
+    def apply_noise_to_dataset(self, folder, image_filename, noise_config):
         """
             Applies noises according to the noise configuration to the image given via its filename
 
@@ -160,7 +161,7 @@ class BasicNoiseGenerator:
         """
         if image_filename.endswith(".png"):
             logging.info(f"Started image {image_filename}")
-            image_path = os.path.join(self.dataset_folder, self.processing_basis, image_filename)
+            image_path = os.path.join(self.dataset_cache, folder, self.processing_basis, image_filename)
             image = cv2.imread(image_path)
             noise_basis_image = image.copy()
 
@@ -181,9 +182,9 @@ class BasicNoiseGenerator:
                     else:
                         logging.error(f"Unknown noise: {noise_type}")
 
-            self.store_noises(image_filename, noise_list)
+            self.store_noises(folder, image_filename, noise_list)
             noisy_images = self.mix_noises(image, noise_list)
-            self.store_noisy_images(image_filename, noisy_images)
+            self.store_noisy_images(folder, image_filename, noisy_images)
 
     def process_dataset(self, noise_config):
         """
@@ -192,6 +193,10 @@ class BasicNoiseGenerator:
             :param noise_config: This is a dictionary loaded from a json file containing the parameters required for the creation of noise
             :type: dict
         """
-        image_filenames = os.listdir((self.dataset_folder + self. processing_basis))
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            executor.map(lambda filename: self.apply_noise_to_dataset(filename, noise_config), image_filenames)
+        all_folders = [folder for folder in os.listdir(self.dataset_cache)]
+        for folder in all_folders:
+            dir_path = os.path.join(self.dataset_cache, folder, self. processing_basis)
+            image_filenames = os.listdir(dir_path)
+            logging.info(f"Processing folder {image_filenames}")
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                executor.map(lambda file_name: self.apply_noise_to_dataset(folder, file_name, noise_config), image_filenames)

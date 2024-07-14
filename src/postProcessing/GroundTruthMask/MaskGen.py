@@ -44,7 +44,7 @@ class MaskGenerator:
 
         # Define input and output directories based on the pipeline version and number of generation
         self.input_dir = f"{paths['dataset_cache']}{paths['pipeline_version']+paths['number_of_generation']}"
-        self.output_dir = f"{paths['dataset_cache']}{paths['mask_out']}{paths['pipeline_version']+paths['number_of_generation']}"
+        self.output_dir = f"{paths['dataset_output']}{paths['pipeline_version']+paths['number_of_generation']}"
         
         logging.info(f"Input directory: {self.input_dir}")
         logging.info(f"Output directory: {self.output_dir}")
@@ -151,7 +151,7 @@ class MaskGenerator:
             # logging.info(f"Combo folders: {combo_folders}")
             if os.path.isdir(os.path.join(input_dir, combo_folders)):
                 folder_paths = os.path.join(input_dir, combo_folders)
-                temp_output_path = os.path.join(self.output_dir, combo_folders)
+                temp_output_path = os.path.join(self.output_dir, combo_folders, paths["mask_out"])
             input_folders[combo_folders] = [folder_paths, temp_output_path]
             # logging.info(f"Combo folders: {combo_folders}")
         logging.info(f"All folders paths: {input_folders}")

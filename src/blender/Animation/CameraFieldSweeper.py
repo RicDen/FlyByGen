@@ -41,6 +41,15 @@ class CameraFieldSweeper:
 
         self.camera = config["camera"]
         self.obj_camera = bpy.data.objects[self.camera]
+        bpy.context.scene.camera = self.obj_camera
+        
+        # Check if the camera object exists
+        if self.obj_camera is None:
+            bpy.ops.object.camera_add()
+            self.obj_camera = bpy.context.object
+            bpy.context.scene.camera = self.obj_camera
+            logging.warning("No camera object found. Created a new camera object.")
+        
         self.target = config["target"]
         self.obj_target = bpy.data.objects[self.target]
         self.camera_closest = config["camera_closest"]
@@ -75,8 +84,6 @@ class CameraFieldSweeper:
                     rot_to_target = self.look_at()
                     self.obj_camera.rotation_euler = rot_to_target
                     self.obj_camera.keyframe_insert(data_path="rotation_euler", frame=frame_count)
-                    logging.info(f"Camera Location: {self.obj_camera.location}")
-                    logging.info(f"Camera Rotation: {self.obj_camera.rotation_euler}")
                     # Adjust rotation incrementally
                     # FEATURE: Randomize the order of the angles
                     

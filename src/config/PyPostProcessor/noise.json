@@ -9,7 +9,7 @@
         "std": 15
       },
       "poisson": {
-        "enabled": false,
+        "enabled": true,
         "amount": 0.1
       }
     

@@ -4,6 +4,11 @@
         "class_path": "src/postProcessing/GroundTruthMask/MaskGen.py",
         "module_name": "MaskGen",
         "class_name": "MaskGenerator"
+      },
+      {
+        "class_path": "src/postProcessing/Noise/NoiseGen_basic.py",
+        "module_name": "BasicNoiseGen",
+        "class_name": "BasicNoiseGenerator"
       }
     ]
   }
