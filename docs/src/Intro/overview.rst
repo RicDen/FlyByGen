@@ -26,4 +26,3 @@ images of comet fly-bys for other mission scenarios.
 Issues
 ------
 Json files cannot be updated during runtime before they have been loaded. They are loaded during the process and thus changing them during runtime (before the render starts) can lead to unwanted results
-s
