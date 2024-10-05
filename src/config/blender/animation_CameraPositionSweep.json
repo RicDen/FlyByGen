@@ -1,0 +1,15 @@
+{
+  "camera": "Camera",
+  "target": "core",
+  "camera_closest": [1000, 400, 0],
+  "azimuth_range": [-180, 180],
+  "azimuth_steps": 90,
+  "elevation_range": [-90, 91],
+  "elevation_steps": 90,
+  "fov": 35,
+  "clip_start": 0.1,
+  "clip_end": 100000,
+  "speed": 80,
+  "fps": 24,
+  "randomization": 50
+}

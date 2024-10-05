@@ -21,14 +21,14 @@
       "class_name": "DustJetGenerator"
     },
     {
-      "class_path": "src\\blender\\Animation\\CameraFieldSweeper.py",
-      "module_name": "CameraField",
-      "class_name": "CameraFieldSweeper"
+      "class_path": "src\\blender\\Animation\\CameraPositionSweeper.py",
+      "module_name": "CameraPosition",
+      "class_name": "CameraPositionSweeper"
     },
     {
-      "class_path": "src\\blender\\Output\\DatasetGenerator.py",
-      "module_name": "DatasetGenerator",
-      "class_name": "DatasetGenerator"
+        "class_path": "src\\blender\\Output\\DatasetGenerator.py",
+        "module_name": "DatasetGenerator",
+        "class_name": "DatasetGenerator"
     }
   ]
 }
