@@ -160,66 +160,71 @@ class MaskGenerator:
             # # Create the output directory if it doesn't exist
             # if not os.path.exists(self.output_dir):
             #     os.makedirs(self.output_dir)
-            path_input_combo = input_folders[input_dir_path][0]
-            path_output_combo = input_folders[input_dir_path][1]
-            if not os.path.exists(path_output_combo):
-                os.makedirs(path_output_combo)
-            logging.info(f"Created output directory: {path_output_combo}")
-            all_folders = [folder for folder in os.listdir(path_input_combo) if folder.startswith("all")]
+            self.path_input_combo = input_folders[input_dir_path][0]
+            self.path_output_combo = input_folders[input_dir_path][1]
+            if not os.path.exists(self.path_output_combo):
+                os.makedirs(self.path_output_combo)
+            logging.info(f"Created output directory: {self.path_output_combo}")
+            all_folders = [folder for folder in os.listdir(self.path_input_combo) if folder.startswith("all")]
             logging.info(f"Folders: {all_folders}")
             # Iterate through each image type folder
-            for image_type_name in all_folders:
-                logging.info(f"Image type name: {image_type_name}")
-                # Create an empty mask
-                mask = np.zeros(self.image_shape, dtype=np.uint8)
-
-                # Get the paths of mask images for the current image type
-                mask_image_paths = self.get_mask_image_paths(path_input_combo, image_type_name)
-                logging.info(f"Processing {image_type_name}:")
-                logging.info(f"Mask image paths: {mask_image_paths}")
-                logging.info("\n")
-
-                # Iterate through each mask image path
-                combined_masks = {}
-                for image_path in mask_image_paths:
-                    image_filename = os.path.basename(image_path)
-                    if not "all" in image_path:
-                        logging.info(f"Getting mask for: {image_path}")
-
-                        # Get the mask value and name from the image path
-                        mask_value, mask_name = self.get_mask_value_from_path(image_path)
-                        logging.info(f"Got mask {mask_name} with value {mask_value}")
-
-                        # Create a single mask based on the image path and mask value
-                        single_mask = self.create_mask(image_path, mask_value)
-
-                        # Define the path to save the single mask
-                        # Get the image file name from the image path
-                        logging.info(f"Image file name: {image_filename}")
-                        path_mask = os.path.join(path_output_combo, mask_name)
-                        if not os.path.exists(path_mask):
-                            os.makedirs(path_mask)
-                        single_mask_path = os.path.join(path_mask,image_filename)
-                        logging.info(f"Saving to: {single_mask_path}")
-
-                        # Save the single mask as an image
-                        cv2.imwrite(single_mask_path, single_mask)
-                        # Add the single mask to the overall mask
-                        if image_filename not in combined_masks:
-                            combined_masks[image_filename] = single_mask
-                        else:
-                            combined_masks[image_filename] += single_mask
-
+            # for image_type_name in all_folders:
                 
-                for key, mask in combined_masks.items():
-                    # Define the path to save the combined mask
-                            
-                    if not os.path.exists(os.path.join(path_output_combo, "combined")):
-                        os.makedirs(os.path.join(path_output_combo, "combined"))
-                    full_mask_path = os.path.join(path_output_combo, "combined", key)
-                    logging.info(full_mask_path)
-                    # Save the full mask as an image
-                    cv2.imwrite(full_mask_path, mask)
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                executor.map(lambda image_type_name: self.mask_creator_from_folder(image_type_name), all_folders)
+            
+    def mask_creator_from_folder(self, image_type_name):
+        logging.info(f"Image type name: {image_type_name}")
+        # Create an empty mask
+        mask = np.zeros(self.image_shape, dtype=np.uint8)
+
+        # Get the paths of mask images for the current image type
+        mask_image_paths = self.get_mask_image_paths(self.path_input_combo, image_type_name)
+        logging.info(f"Processing {image_type_name}:")
+        logging.info(f"Mask image paths: {mask_image_paths}")
+        logging.info("\n")
+
+        # Iterate through each mask image path
+        combined_masks = {}
+        for image_path in mask_image_paths:
+            image_filename = os.path.basename(image_path)
+            if not "all" in image_path:
+                logging.info(f"Getting mask for: {image_path}")
+
+                # Get the mask value and name from the image path
+                mask_value, mask_name = self.get_mask_value_from_path(image_path)
+                logging.info(f"Got mask {mask_name} with value {mask_value}")
+
+                # Create a single mask based on the image path and mask value
+                single_mask = self.create_mask(image_path, mask_value)
+
+                # Define the path to save the single mask
+                # Get the image file name from the image path
+                logging.info(f"Image file name: {image_filename}")
+                path_mask = os.path.join(self.path_output_combo, mask_name)
+                if not os.path.exists(path_mask):
+                    os.makedirs(path_mask)
+                single_mask_path = os.path.join(path_mask,image_filename)
+                logging.info(f"Saving to: {single_mask_path}")
+
+                # Save the single mask as an image
+                cv2.imwrite(single_mask_path, single_mask)
+                # Add the single mask to the overall mask
+                if image_filename not in combined_masks:
+                    combined_masks[image_filename] = single_mask
+                else:
+                    combined_masks[image_filename] += single_mask
+
+        
+        for key, mask in combined_masks.items():
+            # Define the path to save the combined mask
+                    
+            if not os.path.exists(os.path.join(self.path_output_combo, "combined")):
+                os.makedirs(os.path.join(self.path_output_combo, "combined"))
+            full_mask_path = os.path.join(self.path_output_combo, "combined", key)
+            logging.info(full_mask_path)
+            # Save the full mask as an image
+            cv2.imwrite(full_mask_path, mask)
 
         # logging.info(f"{image_filenames[0]}")
         # self.apply_noise_to_dataset(image_filenames[0], noise_config)
