@@ -8,8 +8,8 @@
         "use_compositing": false,
         "use_pass_object_index": true
     },
-    "start_frame": 18,
-    "end_frame" :18,
+    "start_frame": 1,
+    "end_frame" :14,
     "render_layers":{
         "all": "all",
         "jets": "Dust.001",
@@ -59,7 +59,7 @@
     },
     "framerange":{
         "frame_start": 0,
-        "frame_end": 971,
+        "frame_end": 15,
         "frame_step": 1,
         "use_multiview": false
     }

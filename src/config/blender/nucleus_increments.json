@@ -3,18 +3,22 @@
   {
     "core":
     {
-    "radius": 2,
     "translation": [
-      2,
-      2,
-      2
+      3,
+      3,
+      3
+    ],
+    "shape": [
+      0.3,
+      0.3,
+      0.3
     ]
     }
     ,
     
       "addon1":
       {
-      "radius": 1.0
+      "radius": 2.0
       }
   }
 }
