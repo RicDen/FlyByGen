@@ -98,14 +98,11 @@ class DatasetGenerator:
         if end_frame < start_frame:
             logging.error(f"Start frame number must be smaller than end frame number!"+
                       "Check the render.json for the correct definition")
-
-        gpu_memory_threshold = sum(self.get_gpu_memory_total())
-        gpu_memory = gpu_memory_threshold
-        logging.info(f"GPU memory available: {gpu_memory}")
-        # Set parameters from Json
-        threshold_factor = 2.0
-        load_delay = 4
         processes = []
+        gpu_list = ['2','3']
+        threshold_factor = 10
+        load_delay = 4
+        self.gpu_min_required_memory = 0
         for frame in range(start_frame, end_frame + 1):
             logging.info(f"Rendering frame: {frame}...")
             for layer, object_name in render_layers.items():
@@ -113,71 +110,130 @@ class DatasetGenerator:
                 frame_output_path = os.path.join(
                     output_dir, f"{scene_id}",f"{combination_id}", f"{layer}", f"frame_")
                 logging.info(f"Frame Output path: {frame_output_path}")
+                gpu_index = gpu_list[frame % len(gpu_list)]
+                logging.info(f"Check if GPU {gpu_index} is ready...")
                 while True:
-                    time.sleep(load_delay)
-                    video_ram = self.get_gpu_memory_usage()
-                    logging.info(f"Memory utilization: {video_ram}")  
-                    if video_ram and all(mem < gpu_memory_threshold for mem in video_ram):
-                        # GPU memory is below the threshold, start rendering
-                        frame_process = self.render_frame(object_name, frame, frame_output_path)
-                        if gpu_memory_threshold == gpu_memory:
-                            logging.info(f"Setting GPU memory threshold...")
-                            max_gpu_memory_usage = self.get_max_gpu_memory_usage(10)
-                            logging.info(f"Maximum GPU usage is: {max_gpu_memory_usage}")
-                            gpu_memory_threshold = gpu_memory - (max_gpu_memory_usage * threshold_factor)
-                            logging.info(f"GPU memory threshold set to: {gpu_memory_threshold}")
+                    if  self.gpu_controller(gpu_index):
+                        logging.info(f"GPU {gpu_index} is ready...")  
+                        frame_process = self.render_frame(object_name, frame, frame_output_path, gpu_index)
                         break
-                    
-                    logging.warning("Waiting for GPU memory to become available...")
-                                      
+                    else: 
+                        logging.warning(f"Waiting for GPU {gpu_index} memory to become available...")
+                
+                if self.gpu_min_required_memory == 0:
+                    logging.info(f"Setting GPU memory threshold...")
+                    max_gpu_memory_usage = self.get_max_gpu_memory_usage(15, gpu_index)
+                    logging.info(f"Maximum GPU usage is: {max_gpu_memory_usage}")
+                    self.gpu_min_required_memory = max_gpu_memory_usage * threshold_factor
+                    logging.info(f"GPU memory threshold set to: {self.gpu_min_required_memory}")                                    
                 processes.append(frame_process)
                 logging.info(f"There are {len(processes)} running.")
             
         for process in processes:
             process.wait()
             
-    def render_frame(self, layer, frame, output_path):
-        paths
+    def gpu_controller(self, gpu_index, load_delay=4):
+        try:
+            time.sleep(load_delay)
+            # Fetch the memory usage and free memory for all GPUs
+            memory_used = self.get_gpu_memory_usage()
+            memory_free = self.get_gpu_memory_free()
+
+            # Ensure the specified GPU index is valid
+            if gpu_index not in memory_used or gpu_index not in memory_free:
+                logging.error(f"Invalid GPU index: {gpu_index}")
+                logging.error(f"Available GPUs: {memory_used.keys()}")
+                return False
+
+            # Get memory usage and free memory for the specified GPU
+            used_memory = memory_used[gpu_index]
+            free_memory = memory_free[gpu_index]
+
+            # Log the memory info for the specific GPU
+            logging.info(f"GPU {gpu_index} - Used memory: {used_memory} MiB")
+            logging.info(f"GPU {gpu_index} - Free memory: {free_memory} MiB")
+
+            # Calculate the memory threshold
+
+            # If the free memory is less than the threshold, wait and retry
+            if free_memory < (self.gpu_min_required_memory):
+                logging.warning(f"Available GPU {gpu_index} memory utilisation ({free_memory}) is below minimum requirement ({self.gpu_min_required_memory}). Waiting for {load_delay} seconds.")
+                return False
+
+            # Proceed with the task if the memory is above the threshold
+            logging.info(f"Enough GPU {gpu_index} memory ({free_memory}) is available (min: {self.gpu_min_required_memory}). Proceeding with task.")
+            
+            return True
+
+        except Exception as e:
+            logging.error(f"Error in GPU controller: {e}")
+    
+    def render_frame(self, layer, frame, output_path, gpu_index = 3):
+        # Set the environment variable to control which GPU is used
+        # The GPU index corresponds to the system GPU IDs (starting from 0)
+        cuda_visible_devices = str(gpu_index)
+        
+        # Logging the GPU being used and the command
+        logging.info(f"Starting subprocess for render on GPU {gpu_index}")
+        
+        # Set the environment variable for CUDA_VISIBLE_DEVICES
+        env = os.environ.copy()
+        env["CUDA_VISIBLE_DEVICES"] = cuda_visible_devices
         render_command = [
-            "blender",
+            paths['blender_path'],
             "-b", paths['render_file'],
             "-P", paths['render_executable'],
             "--", "--cycles-device", "OPTIX", str(layer), str(frame), str(output_path)
         ]
         logging.info(f"Starting subprocess for render")
+        
         frame_process = subprocess.Popen(
-            render_command
+            render_command,
+            env=env  # Pass the modified environment with GPU restrictions
             )
+        
         return frame_process
 
     def get_gpu_memory_usage(self):
+        """Get the memory used by each GPU in MiB."""
         try:
-            result = subprocess.run(['nvidia-smi', '--query-gpu=memory.used', '--format=csv,nounits,noheader'],
-                                    stdout=subprocess.PIPE, universal_newlines=True)
+            result = subprocess.run(
+                ['nvidia-smi', '--query-gpu=memory.used', '--format=csv,nounits,noheader'],
+                stdout=subprocess.PIPE, universal_newlines=True
+            )
+            # Result is a list of memory used by each GPU
             memory_used = [int(x) for x in result.stdout.strip().split('\n')]
-            return memory_used
-        except Exception as e:
-            logging.error(f"Error: {e}")
-            return None
-    def get_gpu_memory_total(self):
-        try:
-            result = subprocess.run(['nvidia-smi', '--query-gpu=memory.free', '--format=csv,nounits,noheader'],
-                                    stdout=subprocess.PIPE, universal_newlines=True)
-            memory_total = [int(x) for x in result.stdout.strip().split('\n')]
-            return memory_total
+            gpu_memory_usage = {f"{i}": mem for i, mem in enumerate(memory_used)}
+            return gpu_memory_usage
         except Exception as e:
             logging.error(f"Error: {e}")
             return None
 
-    def get_max_gpu_memory_usage(self, test_duration):
+    def get_gpu_memory_free(self):
+        """Get the free memory of each GPU in MiB."""
+        try:
+            result = subprocess.run(
+                ['nvidia-smi', '--query-gpu=memory.free', '--format=csv,nounits,noheader'],
+                stdout=subprocess.PIPE, universal_newlines=True
+            )
+            # Result is a list of memory free for each GPU
+            memory_free = [int(x) for x in result.stdout.strip().split('\n')]
+            gpu_memory_free = {f"{i}": mem for i, mem in enumerate(memory_free)}
+            return gpu_memory_free
+        except Exception as e:
+            logging.error(f"Error: {e}")
+        return None
+
+
+    def get_max_gpu_memory_usage(self, test_duration, gpu_index):
 
         # Get the current time
         start_time = time.time()
         max_gpu_memory_usage = 0
         # Run the loop for the specified duration
         while time.time() - start_time < test_duration:
-            if max_gpu_memory_usage < self.get_gpu_memory_usage()[0]:
-                max_gpu_memory_usage = self.get_gpu_memory_usage()[0]
+            if max_gpu_memory_usage < self.get_gpu_memory_usage()[gpu_index]:
+                max_gpu_memory_usage = self.get_gpu_memory_usage()[gpu_index]
             time.sleep(0.1)
 
         return max_gpu_memory_usage
