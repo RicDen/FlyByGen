@@ -99,9 +99,12 @@ class DatasetGenerator:
             logging.error(f"Start frame number must be smaller than end frame number!"+
                       "Check the render.json for the correct definition")
         processes = []
+        gpu_iterator = 0
         gpu_list = ['2','3']
         threshold_factor = 10
-        load_delay = 4
+        load_delay = 2
+        render_number = (end_frame+1) * len(render_layers)
+        logging.info(f"Rendering {render_number} frames...")
         self.gpu_min_required_memory = 0
         for frame in range(start_frame, end_frame + 1):
             logging.info(f"Rendering frame: {frame}...")
@@ -110,9 +113,12 @@ class DatasetGenerator:
                 frame_output_path = os.path.join(
                     output_dir, f"{scene_id}",f"{combination_id}", f"{layer}", f"frame_")
                 logging.info(f"Frame Output path: {frame_output_path}")
-                gpu_index = gpu_list[frame % len(gpu_list)]
-                logging.info(f"Check if GPU {gpu_index} is ready...")
+                
                 while True:
+                    gpu_index = gpu_list[gpu_iterator % len(gpu_list)]
+                    logging.info(f"GPU iterator at {gpu_iterator} selecting GPU {gpu_index}")
+                    gpu_iterator = gpu_iterator + 1
+                    logging.info(f"Check if GPU {gpu_index} is ready...")
                     if  self.gpu_controller(gpu_index):
                         logging.info(f"GPU {gpu_index} is ready...")  
                         frame_process = self.render_frame(object_name, frame, frame_output_path, gpu_index)
@@ -127,13 +133,14 @@ class DatasetGenerator:
                     self.gpu_min_required_memory = max_gpu_memory_usage * threshold_factor
                     logging.info(f"GPU memory threshold set to: {self.gpu_min_required_memory}")                                    
                 processes.append(frame_process)
-                logging.info(f"There are {len(processes)} running.")
+                logging.info(f"There have been {len(processes)} out {render_number} started.")
             
         for process in processes:
             process.wait()
             
     def gpu_controller(self, gpu_index, load_delay=4):
         try:
+            logging.info(f"Loading delay for {load_delay} seconds...")
             time.sleep(load_delay)
             # Fetch the memory usage and free memory for all GPUs
             memory_used = self.get_gpu_memory_usage()
